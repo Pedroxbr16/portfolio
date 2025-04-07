@@ -3,17 +3,12 @@ import emailjs from 'emailjs-com';
 import '../App.css'; // ou seu CSS
 
 
-
-console.log("Variáveis:", process.env);
-
-
 export default function ContactForm() {
   const form = useRef();
 
   const serviceID = process.env.REACT_APP_EMAILJS_SERVICE_ID;
   const templateID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
   const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
-  console.log("Chave pública:", publicKey);
 
   
   const sendEmail = (e) => {
