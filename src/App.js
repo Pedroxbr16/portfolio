@@ -49,10 +49,16 @@ export default function Portfolio() {
     </nav>
 
     <div className="social-icons">
-      <FontAwesomeIcon icon={faGithub} className='github'/>
-      <FontAwesomeIcon icon={faLinkedin} className='linkedin' />
-      <FontAwesomeIcon icon={faInstagram} className='instagram' />
-    </div>
+  <a href="https://github.com/Pedroxbr16" target="_blank" rel="noopener noreferrer">
+    <FontAwesomeIcon icon={faGithub} className="github" />
+  </a>
+  <a href="https://www.linkedin.com/in/pedro-justo-463520298/" target="_blank" rel="noopener noreferrer">
+    <FontAwesomeIcon icon={faLinkedin} className="linkedin" />
+  </a>
+  <a href="https://www.instagram.com/pedrojusto_/" target="_blank" rel="noopener noreferrer">
+    <FontAwesomeIcon icon={faInstagram} className="instagram" />
+  </a>
+</div>
   </div>
 </header>
 
@@ -110,11 +116,18 @@ export default function Portfolio() {
 
       {/* Footer */}
       <footer className="footer">
-        <div className="social-icons">
-          <FontAwesomeIcon icon={faGithub} className='github'/>
-          <FontAwesomeIcon icon={faLinkedin} className='linkedin' />
-          <FontAwesomeIcon icon={faInstagram} className='instagram'/>
-        </div>
+       
+    <div className="social-icons">
+  <a href="https://github.com/Pedroxbr16" target="_blank" rel="noopener noreferrer">
+    <FontAwesomeIcon icon={faGithub} className="github" />
+  </a>
+  <a href="https://www.linkedin.com/in/pedro-justo-463520298/" target="_blank" rel="noopener noreferrer">
+    <FontAwesomeIcon icon={faLinkedin} className="linkedin" />
+  </a>
+  <a href="https://www.instagram.com/pedrojusto_/" target="_blank" rel="noopener noreferrer">
+    <FontAwesomeIcon icon={faInstagram} className="instagram" />
+  </a>
+</div>
       </footer>
     </div>
   );
