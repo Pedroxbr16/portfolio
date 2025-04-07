@@ -15,6 +15,8 @@ import {
   faInstagram
 } from '@fortawesome/free-brands-svg-icons';
 import './App.css';
+import ContatoForm from './component/ContatoForm';
+
 
 const techIcons = [
   { icon: faHtml5, label: 'HTML5' },
@@ -103,14 +105,8 @@ export default function Portfolio() {
       </section>
 
       {/* Contato */}
-      <section className="contact">
-        <h2>Entre em contato</h2>
-        <form className="contact-form">
-          <input type="email" placeholder="Email" />
-          <textarea placeholder="Mensagem"></textarea>
-          <button type="submit">Enviar</button>
-        </form>
-      </section>
+      <ContatoForm />
+
 
       {/* Footer */}
       <footer className="footer">
