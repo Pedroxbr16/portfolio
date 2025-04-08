@@ -180,7 +180,9 @@ export default function Portfolio() {
       </footer>
       {/* Botão flutuante para abrir menu */}
       <div className="floating-nav">
-  <button className="floating-button" onClick={toggleMenu}>☰</button>
+  <button className="floating-button" onClick={toggleMenu}>
+          <img src="/trace.svg" alt="Menu" className="menu-icon" />
+    </button>
   {menuOpen && (
     <div className="floating-menu">
       <a href="#home" onClick={toggleMenu}>Home</a>
@@ -193,6 +195,6 @@ export default function Portfolio() {
 
     </div>
 
-    
+// ☰
   );
 }
