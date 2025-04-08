@@ -1,3 +1,4 @@
+/* Reset */
 body {
   margin: 0;
   font-family: Rubik, sans-serif;
@@ -10,8 +11,9 @@ body {
   overflow-x: hidden;
 }
 
+/* Navbar */
 .navbar {
-  background-color: #000000;
+  background-color: #000;
   border-bottom: 1px solid #333;
   padding: 20px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
@@ -21,10 +23,6 @@ body {
   width: 48px;
   height: 48px;
   object-fit: contain;
-}
-
-.logo {
-  margin-right: 20px;
 }
 
 .nav-container {
@@ -68,6 +66,7 @@ body {
   cursor: pointer;
 }
 
+/* Intro */
 .intro {
   background: url('../public/background.png') no-repeat center/cover;
   padding: 0px 40px;
@@ -87,7 +86,6 @@ body {
 .intro-text {
   max-width: 600px;
 }
-
 
 .intro-text h1 {
   margin: 0;
@@ -113,19 +111,18 @@ body {
   font-size: 18px;
 }
 
+/* Tecnologias */
 .tech-section {
-  background: #000000;
+  background: #000;
   padding: 30px 10px;
   text-align: center;
 }
 
 .tech-title {
-  width: 100%;
-  text-align: start;
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
-  padding-left: 360px;
+  text-align: center;
 }
 
 .tech-icons-container {
@@ -148,7 +145,6 @@ body {
 .tech-icon:hover .fa-html5 { color: #e44d26; }
 .tech-icon:hover .fa-css3-alt { color: #264de4; }
 .tech-icon:hover .fa-js { color: #f0db4f; }
-.tech-icon:hover .fa-bootstrap { color: #563d7c; }
 .tech-icon:hover .fa-react { color: #61dafb; }
 .tech-icon:hover .fa-node-js { color: #68a063; }
 .tech-icon:hover .fa-php { color: #777bb4; }
@@ -161,6 +157,7 @@ body {
   font-weight: bold;
 }
 
+/* Projetos */
 .projects {
   padding: 40px 20px;
   text-align: center;
@@ -169,45 +166,92 @@ body {
 
 .carousel {
   position: relative;
-  width: 100%;
-  max-width: 700px;
-  margin: 20px auto;
   overflow: hidden;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .carousel-track {
   display: flex;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.5s ease;
 }
 
-.carousel-item {
+.carousel-slide {
+  display: flex;
   flex: 0 0 100%;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.project-card {
   background: white;
-  height: 200px;
-  margin: 0 5px;
+  color: black;
+  width: 30%;
+  height: 250px;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.project-btn {
+  background: #0061f1;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.project-btn:hover {
+  background: #0047b3;
 }
 
 .carousel-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: #8b5cf6;
-  color: white;
+  background: transparent;
   border: none;
-  font-size: 24px;
-  padding: 10px;
+  font-size: 28px;
+  color: white;
   cursor: pointer;
-  z-index: 1;
+  z-index: 2;
 }
 
 .carousel-btn.left {
-  left: 0;
+  left: 10px;
 }
 
 .carousel-btn.right {
-  right: 0;
+  right: 10px;
 }
 
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ccc;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.indicator.active {
+  background: #0061f1;
+}
+
+/* Footer */
 .footer {
   padding: 20px 20px;
   background: #111;
@@ -219,6 +263,7 @@ body {
   justify-content: center;
 }
 
+/* Contato */
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -249,7 +294,11 @@ body {
   background: #2875d9;
 }
 
-/* Responsividade */
+.contact h2{
+  text-align: center;
+}
+
+/* Responsivo */
 @media (max-width: 768px) {
   .nav-container {
     flex-direction: column;
@@ -267,23 +316,18 @@ body {
     height: 250px;
   }
 
-  .tech-title {
-    padding-left: 2px;
-    text-align: center;
-  }
-
   .nav-links {
     flex-direction: column;
-    gap: 10px;
     align-items: flex-start;
+    gap: 10px;
   }
 
-  .logo-img {
-    width: 40px;
-    height: 40px;
+  .carousel-slide {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .carousel-item {
-    height: 150px;
+  .project-card {
+    width: 80%;
   }
 }
