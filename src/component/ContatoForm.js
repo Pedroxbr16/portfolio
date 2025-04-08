@@ -32,7 +32,7 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="contact">
+    <section id="contato" className="contact">
       <h2>Entre em contato</h2>
       <form className="contact-form" ref={form} onSubmit={sendEmail}>
         <input type="email" name="from_email" placeholder="Seu e-mail" required />
