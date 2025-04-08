@@ -7,6 +7,7 @@ body {
   font-family: Rubik, sans-serif;
   background-color: #000;
   color: #fff;
+  overflow-x: hidden;
 }
 
 .container {
@@ -111,6 +112,7 @@ body {
   margin: 20px auto;
   color: #aaa;
   font-size: 18px;
+  text-align: justify;
 }
 
 /* Tecnologias */
@@ -346,22 +348,33 @@ body {
     justify-content: center;
   }
 
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+    touch-action: pan-y;
+  }
+  
   .carousel-slide {
-    flex-direction: row;
+    flex: 0 0 100%;
     justify-content: center;
+    display: flex;
+    padding: 20px 0;
   }
 
   .project-card {
-    width: 90%;
-    height: auto;
+    width: 80%;
+    max-width: 400px;
+    margin: 0 auto;
   }
-
   .carousel-btn.left {
     left: 5px;
+    display: none;
   }
 
   .carousel-btn.right {
     right: 5px;
+    display: none;
   }
 
   .carousel-btn {
@@ -448,7 +461,5 @@ body {
     align-items: center;
   }
 
-  .project-card {
-    width: 95%;
-  }
+
 }

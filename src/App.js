@@ -26,13 +26,13 @@ const projects = [
   { title: 'Projeto 4', description: 'Descrição do Projeto 4', link: '#' }
 ];
 
-
-
 export default function Portfolio() {
   const [index, setIndex] = useState(0);
   const [cardsPerSlide, setCardsPerSlide] = useState(window.innerWidth < 768 ? 1 : 2);
   const carouselRef = useRef();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -58,6 +58,27 @@ export default function Portfolio() {
     const prevIndex = (index - 1 + maxIndex + 1) % (maxIndex + 1);
     setIndex(prevIndex);
     carouselRef.current.style.transform = `translateX(-${prevIndex * 100}%)`;
+  };
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) handleNext();
+    else if (isRightSwipe) handlePrev();
+
+    setTouchStart(null);
+    setTouchEnd(null);
   };
 
   useEffect(() => {
@@ -107,7 +128,10 @@ export default function Portfolio() {
             <h1>Pedro Justo</h1>
             <p className="subtitle">Desenvolvedor Web</p>
             <p className="description">
-              Sou desenvolvedor fullstack com especialização em aplicações web, atuando com foco em tecnologias como React e Node.js. Tenho  experiência no desenvolvimento de interfaces funcionais e intuitivas, construção de APIs escaláveis e integração de sistemas modernos. Tenho como propósito transformar ideias em soluções tecnológicas eficientes, contribuindo diretamente para a otimização de processos e a melhoria da experiência do usuário. Estou em constante atualização, buscando novas ferramentas e conhecimentos que me permitam evoluir continuamente e entregar resultados de excelência.
+              Sou desenvolvedor fullstack com especialização em aplicações web, atuando com foco em tecnologias como React e Node.js. Tenho  experiência no desenvolvimento de interfaces funcionais e intuitivas, construção de APIs escaláveis e integração de sistemas modernos. 
+            </p> 
+            <p className='description'>
+              Tenho como propósito transformar ideias em soluções tecnológicas eficientes, contribuindo diretamente para a otimização de processos e a melhoria da experiência do usuário. Estou em constante atualização, buscando novas ferramentas e conhecimentos que me permitam evoluir continuamente e entregar resultados de excelência.
             </p>
           </div>
           <img src="/user.png" alt="Pedro Justo" className="profile-img" />
@@ -131,7 +155,13 @@ export default function Portfolio() {
         <p>Um pouco de alguns projetos pessoais e trabalho que participei</p>
         <div className="carousel">
           <button className="carousel-btn left" onClick={handlePrev}>&#8592;</button>
-          <div className="carousel-track" ref={carouselRef}>
+          <div
+            className="carousel-track"
+            ref={carouselRef}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
             {Array.from({ length: Math.ceil(projects.length / cardsPerSlide) }).map((_, groupIndex) => (
               <div className="carousel-slide" key={groupIndex}>
                 {projects.slice(groupIndex * cardsPerSlide, groupIndex * cardsPerSlide + cardsPerSlide).map((project, index) => (
@@ -176,25 +206,22 @@ export default function Portfolio() {
             <FontAwesomeIcon icon={faInstagram} className="instagram" />
           </a>
         </div>
-        
       </footer>
+
       {/* Botão flutuante para abrir menu */}
       <div className="floating-nav">
-  <button className="floating-button" onClick={toggleMenu}>
+        <button className="floating-button" onClick={toggleMenu}>
           <img src="/trace.svg" alt="Menu" className="menu-icon" />
-    </button>
-  {menuOpen && (
-    <div className="floating-menu">
-      <a href="#home" onClick={toggleMenu}>Home</a>
-      <a href="#tecnologias" onClick={toggleMenu}>Tecnologias</a>
-      <a href="#projetos" onClick={toggleMenu}>Projetos</a>
-      <a href="#contato" onClick={toggleMenu}>Contato</a>
+        </button>
+        {menuOpen && (
+          <div className="floating-menu">
+            <a href="#home" onClick={toggleMenu}>Home</a>
+            <a href="#tecnologias" onClick={toggleMenu}>Tecnologias</a>
+            <a href="#projetos" onClick={toggleMenu}>Projetos</a>
+            <a href="#contato" onClick={toggleMenu}>Contato</a>
+          </div>
+        )}
+      </div>
     </div>
-  )}
-</div>
-
-    </div>
-
-// ☰
   );
 }
