@@ -9,10 +9,8 @@ body {
   color: #fff;
   overflow-x: hidden;
 }
-
 .container {
   width: 100%;
-  overflow-x: hidden;
 }
 
 /* Navbar */
@@ -22,13 +20,11 @@ body {
   padding: 20px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
 }
-
 .logo-img {
   width: 48px;
   height: 48px;
   object-fit: contain;
 }
-
 .nav-container {
   display: flex;
   justify-content: space-between;
@@ -36,35 +32,23 @@ body {
   padding: 0 40px;
   flex-wrap: wrap;
 }
-
 .nav-links {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
 }
-
 .nav-links a {
   color: #fff;
   text-decoration: none;
   font-weight: bold;
 }
-
 .nav-links a:hover {
   color: #027e97;
 }
-
 .social-icons {
   display: flex;
   gap: 10px;
 }
-
-.github,
-.linkedin,
-.instagram {
-  width: 28px;
-  height: 28px;
-}
-
 .social-icons svg {
   color: #fff;
   cursor: pointer;
@@ -73,10 +57,8 @@ body {
 /* Intro */
 .intro {
   background: url('../public/background.png') no-repeat center/cover;
-  padding: 0px 40px;
-  padding-top: 84px;
+  padding: 84px 40px 0;
 }
-
 .intro-content {
   display: flex;
   justify-content: space-between;
@@ -85,34 +67,28 @@ body {
   margin: 0 auto;
   gap: 40px;
 }
-
 .intro-text {
   max-width: 600px;
 }
-
 .intro-text h1 {
   margin: 0;
   font-size: 32px;
 }
-
 .profile-img {
   width: 370px;
   height: 370px;
   object-fit: cover;
 }
-
 .subtitle {
   font-size: 32px;
   color: #ccc;
   margin: 0;
 }
-
 .description {
-  max-width: 600px;
-  margin: 20px auto;
   color: #aaa;
   font-size: 18px;
   text-align: justify;
+  margin: 20px auto;
 }
 
 /* Tecnologias */
@@ -121,31 +97,25 @@ body {
   padding: 30px 10px;
   text-align: center;
 }
-
 .tech-title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
-  text-align: center;
 }
-
 .tech-icons-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
-
 .tech-icon {
   margin: 20px;
   text-align: center;
   transition: transform 0.3s;
   cursor: pointer;
 }
-
 .tech-icon:hover {
   transform: scale(1.1);
 }
-
 .tech-icon:hover .fa-html5 { color: #e44d26; }
 .tech-icon:hover .fa-css3-alt { color: #264de4; }
 .tech-icon:hover .fa-js { color: #f0db4f; }
@@ -154,7 +124,6 @@ body {
 .tech-icon:hover .fa-php { color: #777bb4; }
 .tech-icon:hover .fa-java { color: #f89820; }
 .tech-icon:hover .fa-python { color: #3776ab; }
-
 .tech-icon p {
   margin-top: 10px;
   color: #ccc;
@@ -165,56 +134,126 @@ body {
 .projects {
   padding: 40px 20px;
   text-align: center;
-  background-color: #0D0D0D;
+  background-color: #080808;
 }
-
 .carousel {
   position: relative;
   overflow: hidden;
   max-width: 1000px;
   margin: 0 auto;
 }
-
 .carousel-track {
   display: flex;
   transition: transform 0.5s ease;
 }
-
 .carousel-slide {
   display: flex;
   flex: 0 0 100%;
   justify-content: space-around;
   gap: 20px;
 }
-
 .project-card {
   background: white;
   color: black;
   width: 30%;
-  height: 250px;
   padding: 20px;
   border-radius: 12px;
-  text-align: center;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  align-items: center;
 }
-
-.project-btn {
-  background: #0061f1;
-  color: white;
-  padding: 8px 16px;
+.card-image-placeholder {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card-info {
+  text-align: center;
+}
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.card-description {
+  font-size: 14px;
+  color: #333;
+  margin: 10px 0;
+}
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+.card-tag {
+  background-color: #eee;
+  color: #333;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 12px;
+}
+.card-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 20px;
+}
+.btn-outline, .btn-black {
+  padding: 6px 10px;
+  font-size: 14px;
   border-radius: 6px;
   text-decoration: none;
-  margin-top: 20px;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-outline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: transparent;
+  color: black;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+.btn-black {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  background-color: #111;
+  color: white;
+  text-decoration: none;
+  transition: 0.3s ease;
 }
 
-.project-btn:hover {
-  background: #0047b3;
+.btn-outline:hover {
+  background: #f0f0f0;
 }
-
+.btn-black:hover {
+  background-color: #222;
+}
+.icon-left, .icon-right {
+  width: 16px;
+  height: 16px;
+}
+/* Carousel */
 .carousel-btn {
   position: absolute;
   top: 50%;
@@ -226,14 +265,8 @@ body {
   cursor: pointer;
   z-index: 2;
 }
-
-.carousel-btn.left {
-  left: 10px;
-}
-
-.carousel-btn.right {
-  right: 10px;
-}
+.carousel-btn.left { left: 10px; }
+.carousel-btn.right { right: 10px; }
 
 .carousel-indicators {
   display: flex;
@@ -241,28 +274,24 @@ body {
   gap: 10px;
   margin-top: 20px;
 }
-
 .indicator {
   width: 10px;
   height: 10px;
   border-radius: 50%;
   background: #ccc;
   cursor: pointer;
-  transition: background 0.3s;
 }
-
 .indicator.active {
   background: #0061f1;
 }
 
 /* Footer */
 .footer {
-  padding: 20px 20px;
+  padding: 20px;
   background: #111;
   border-top: 1px solid #333;
   text-align: center;
 }
-
 .footer .social-icons {
   justify-content: center;
 }
@@ -273,9 +302,8 @@ body {
   flex-direction: column;
   gap: 10px;
   max-width: 400px;
-  margin: 0 auto;
+  margin: 0 auto 100px;
 }
-
 .contact-form input,
 .contact-form textarea {
   padding: 10px;
@@ -283,7 +311,6 @@ body {
   border: none;
   outline: none;
 }
-
 .contact-form button {
   background: #0061f1;
   color: white;
@@ -291,98 +318,48 @@ body {
   padding: 10px;
   border-radius: 4px;
   cursor: pointer;
-  margin-bottom: 100px;
 }
-
 .contact-form button:hover {
   background: #2875d9;
 }
-
 .contact h2 {
   text-align: center;
 }
 
+/* Floating Menu */
 .floating-nav {
   display: none;
 }
 
 /* Responsivo */
 @media (max-width: 1024px) {
-  .carousel-slide {
-    gap: 10px;
-  }
-
-  .project-card {
-    width: 45%;
-    height: auto;
-  }
+  .carousel-slide { gap: 10px; }
+  .project-card { width: 45%; }
 }
-
 @media (max-width: 768px) {
-  .nav-container {
-    align-items: center;
-    gap: 15px;
-  }
-
-  .nav-links {
-    display: none;
-  }
+  .nav-container { gap: 15px; }
+  .nav-links { display: none; }
 
   .intro-content {
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
-
-  .intro-text {
-    max-width: 100%;
-    padding: 0 20px;
-  }
-
   .profile-img {
     width: 200px;
     height: 200px;
   }
 
-  .tech-icons-container {
-    justify-content: center;
-  }
-
-  .carousel-track {
-    display: flex;
-    transition: transform 0.5s ease;
-    width: 100%;
-    touch-action: pan-y;
-  }
-  
   .carousel-slide {
-    flex: 0 0 100%;
-    justify-content: center;
-    display: flex;
-    padding: 20px 0;
+    flex-direction: column;
+    align-items: center;
   }
-
   .project-card {
-    width: 80%;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  .carousel-btn.left {
-    left: 5px;
-    display: none;
-  }
-
-  .carousel-btn.right {
-    right: 5px;
-    display: none;
+    width: 90%;
   }
 
   .carousel-btn {
-    font-size: 24px;
-  }
-  .contact-form {
-    max-width: 85%;
-    padding: 0 20px;
+    display: none;
   }
 
   .floating-nav {
@@ -392,23 +369,21 @@ body {
     right: 20px;
     z-index: 1000;
   }
-  
-
   .floating-button {
     background: #0061f1;
-    color: white;
-    border: none;
-    padding: 0px 0px;
-    font-size: 22px;
     border-radius: 50%;
+    border: none;
     cursor: pointer;
+    padding: 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    display: flex;
   }
-  
+  .menu-icon {
+    width: 48px;
+    height: 48px;
+  }
   .floating-menu {
     position: absolute;
-    bottom: 60px; /* ajusta conforme necessário */
+    bottom: 60px;
     right: 0;
     background: #111;
     border-radius: 8px;
@@ -416,54 +391,14 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    z-index: 999;
-    
   }
-  
-  .menu-icon{
-    width: 48px;
-    height: 48px;
-  }
-
   .floating-menu a {
     color: white;
     text-decoration: none;
     font-weight: bold;
     font-size: 16px;
   }
-
   .floating-menu a:hover {
     color: #0061f1;
   }
-}
-
-@media (max-width: 480px) {
-  .nav-container {
-    padding: 0 20px;
-  }
-
-  .project-btn {
-    font-size: 14px;
-    padding: 6px 12px;
-  }
-
-  .carousel-btn {
-    font-size: 22px;
-  }
-
-  .carousel-indicators {
-    gap: 6px;
-  }
-
-  .indicator {
-    width: 8px;
-    height: 8px;
-  }
-
-  .carousel-slide {
-    flex-direction: column;
-    align-items: center;
-  }
-
-
 }

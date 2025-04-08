@@ -20,10 +20,38 @@ const techIcons = [
 ];
 
 const projects = [
-  { title: 'Gestão de Clínica', description: 'Sistema completo com React, Node e MySQL', link: 'https://github.com/Pedroxbr16/clinica-node' },
-  { title: 'Sistema Patrimonial', description: 'Estoque e controle com React e MongoDB', link: 'https://github.com/Pedroxbr16/patrimonio-react' },
-  { title: 'Documentação', description: 'Plataforma de documentação criada com Docusaurus para organizar e compartilhar conteúdos técnicos sobre desenvolvimento.', link: 'https://pemtech.vercel.app' },
-  { title: 'Projeto 4', description: 'Descrição do Projeto 4', link: '#' }
+  {
+    title: 'Gestão de Clínica',
+    description: 'Sistema de gestão clínica com agenda médica, cadastro de pacientes, controle de estoque e módulo financeiro integrado.',
+    code: 'https://github.com/Pedroxbr16/clinica-node',
+    demo: '#',
+    image: '/clinica.png',
+    tags: ['React', 'Node.js', 'MySQL']
+  },
+  {
+    title: 'Sistema Patrimonial',
+    description: 'Sistema de controle de bens com cadastro, edição e geração de termos de responsabilidade para empréstimos.',
+    code: 'https://github.com/Pedroxbr16/patrimonio-react',
+    demo: '#',
+    image: '/embreve.png',
+    tags: ['React', 'Node.js', 'MongoDB']
+  },
+  {
+    title: 'Documentação',
+    description: 'Documentação criada com Docusaurus para organizar conteúdos técnicos.',
+    code: 'https://github.com/Pedroxbr16/documentacao-geral',
+    demo: 'https://pemtech.vercel.app',
+    image: '/documentacao.png',
+    tags: ['Docusaurus', 'Markdown']
+  },
+  {
+    title: 'Em Breve',
+    description: 'Em breve',
+    code: '#',
+    demo: '#',
+    image: '/embreve.png',
+    tags: []
+  }
 ];
 
 export default function Portfolio() {
@@ -34,14 +62,10 @@ export default function Portfolio() {
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   useEffect(() => {
-    const updateCardsPerSlide = () => {
-      setCardsPerSlide(window.innerWidth < 768 ? 1 : 2);
-    };
+    const updateCardsPerSlide = () => setCardsPerSlide(window.innerWidth < 768 ? 1 : 2);
     window.addEventListener('resize', updateCardsPerSlide);
     return () => window.removeEventListener('resize', updateCardsPerSlide);
   }, []);
@@ -60,30 +84,21 @@ export default function Portfolio() {
     carouselRef.current.style.transform = `translateX(-${prevIndex * 100}%)`;
   };
 
-  const handleTouchStart = (e) => {
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchMove = (e) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
+  const handleTouchStart = (e) => setTouchStart(e.targetTouches[0].clientX);
+  const handleTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
 
   const handleTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
     const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
-
-    if (isLeftSwipe) handleNext();
-    else if (isRightSwipe) handlePrev();
-
+    if (distance > 50) handleNext();
+    else if (distance < -50) handlePrev();
     setTouchStart(null);
     setTouchEnd(null);
   };
 
   useEffect(() => {
-    const maxIndex = Math.ceil(projects.length / cardsPerSlide) - 1;
     const interval = setInterval(() => {
+      const maxIndex = Math.ceil(projects.length / cardsPerSlide) - 1;
       setIndex(prev => {
         const next = (prev + 1) > maxIndex ? 0 : prev + 1;
         if (carouselRef.current) {
@@ -94,7 +109,6 @@ export default function Portfolio() {
     }, 6000);
     return () => clearInterval(interval);
   }, [cardsPerSlide]);
-
   return (
     <div className="container">
       <header className="navbar">
@@ -150,6 +164,7 @@ export default function Portfolio() {
         </div>
       </section>
 
+   
       <section id="projetos" className="projects">
         <h2>Meus Projetos</h2>
         <p>Um pouco de alguns projetos pessoais e trabalho que participei</p>
@@ -166,9 +181,32 @@ export default function Portfolio() {
               <div className="carousel-slide" key={groupIndex}>
                 {projects.slice(groupIndex * cardsPerSlide, groupIndex * cardsPerSlide + cardsPerSlide).map((project, index) => (
                   <div className="project-card" key={index}>
-                    <h3>{project.title}</h3>
-                    <p>{project.description}</p>
-                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-btn">Ver Projeto</a>
+                    <div className="card-image-placeholder">
+                      <img src={project.image} alt={project.title} className="project-image" />
+                    </div>
+                    <div className="card-info">
+                      <h3 className="card-title">{project.title}</h3>
+                      <p className="card-description">{project.description}</p>
+                      <div className="card-tags">
+                        {project.tags.map(tag => (
+                          <span key={tag} className="card-tag">{tag}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="card-buttons">
+  <a href={project.code} target="_blank" rel="noopener noreferrer" className="btn-outline">
+    <FontAwesomeIcon icon={faGithub} className="icon-left" />
+    Código
+  </a>
+  <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-black">
+    Demo
+    <svg className="icon-right" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3z"/>
+      <path d="M5 5h4V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-4h-2v4H5V5z"/>
+    </svg>
+  </a>
+</div>
+
                   </div>
                 ))}
               </div>
@@ -191,6 +229,7 @@ export default function Portfolio() {
           </div>
         </div>
       </section>
+
 
       <ContatoForm />
 
