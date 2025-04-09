@@ -7,6 +7,12 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import './App.css';
 import ContatoForm from './component/ContatoForm';
+import { showSuccessAlert, showErrorAlert, showWarningAlert } from './component/SweetAlert';
+
+
+showSuccessAlert('Mensagem enviada com sucesso!')
+showErrorAlert('Falha ao enviar mensagem.')
+showWarningAlert('Link ainda não foi implementado.')
 
 const techIcons = [
   { icon: faHtml5, label: 'HTML5' },
@@ -194,18 +200,37 @@ export default function Portfolio() {
                       </div>
                     </div>
                     <div className="card-buttons">
-  <a href={project.code} target="_blank" rel="noopener noreferrer" className="btn-outline">
-    <FontAwesomeIcon icon={faGithub} className="icon-left" />
-    Código
-  </a>
-  <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-black">
-    Demo
-    <svg className="icon-right" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3z"/>
-      <path d="M5 5h4V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-4h-2v4H5V5z"/>
-    </svg>
-  </a>
+  {project.code !== '#' ? (
+    <a href={project.code} target="_blank" rel="noopener noreferrer" className="btn-outline">
+      <FontAwesomeIcon icon={faGithub} className="icon-left" />
+      Código
+    </a>
+  ) : (
+    <button className="btn-outline" onClick={() => showWarningAlert('Link de código ainda não disponível.')}>
+      <FontAwesomeIcon icon={faGithub} className="icon-left" />
+      Código
+    </button>
+  )}
+
+  {project.demo !== '#' ? (
+    <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-black">
+      Demo
+      <svg className="icon-right" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3z"/>
+        <path d="M5 5h4V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-4h-2v4H5V5z"/>
+      </svg>
+    </a>
+  ) : (
+    <button className="btn-black" onClick={() => showWarningAlert('Link da demo ainda não disponível.')}>
+      Demo
+      <svg className="icon-right" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3z"/>
+        <path d="M5 5h4V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-4h-2v4H5V5z"/>
+      </svg>
+    </button>
+  )}
 </div>
+
 
                   </div>
                 ))}

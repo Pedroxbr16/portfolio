@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import emailjs from 'emailjs-com';
-import '../App.css'; // ou seu CSS
-
+import '../App.css';
+import { showSuccessAlert, showErrorAlert } from './SweetAlert'; 
 
 export default function ContactForm() {
   const form = useRef();
@@ -10,23 +10,22 @@ export default function ContactForm() {
   const templateID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
   const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
 
-  
   const sendEmail = (e) => {
     e.preventDefault();
 
     emailjs.sendForm(
-      serviceID,      // seu Service ID
-      templateID,     // substitua pelo Template ID
+      serviceID,
+      templateID,
       form.current,
-      publicKey       // substitua pela Public Key do EmailJS
+      publicKey
     ).then(
       () => {
-        alert('Mensagem enviada com sucesso!');
+        showSuccessAlert('Mensagem enviada com sucesso! Aguarde retorno.');
         form.current.reset();
       },
       (error) => {
         console.error(error.text);
-        alert('Erro ao enviar mensagem. Tente novamente.');
+        showErrorAlert('Erro ao enviar mensagem. Tente novamente.');
       }
     );
   };

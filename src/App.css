@@ -355,11 +355,15 @@ body {
     align-items: center;
   }
   .project-card {
-    width: 90%;
+    width: 85%;
   }
 
   .carousel-btn {
     display: none;
+  }
+
+  .contact-form{
+    margin: 0 35px 100px;
   }
 
   .floating-nav {
