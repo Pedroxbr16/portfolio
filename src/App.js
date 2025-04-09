@@ -7,12 +7,9 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import './App.css';
 import ContatoForm from './component/ContatoForm';
-import { showSuccessAlert, showErrorAlert, showWarningAlert } from './component/SweetAlert';
+import {  showWarningAlert } from './component/SweetAlert';
 
 
-showSuccessAlert('Mensagem enviada com sucesso!')
-showErrorAlert('Falha ao enviar mensagem.')
-showWarningAlert('Link ainda não foi implementado.')
 
 const techIcons = [
   { icon: faHtml5, label: 'HTML5' },
