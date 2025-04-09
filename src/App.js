@@ -37,7 +37,7 @@ const projects = [
     code: 'https://github.com/Pedroxbr16/patrimonio-react',
     demo: '#',
     image: '/embreve.png',
-    tags: ['React', 'CSS' 'Node.js', 'MongoDB']
+    tags: ['React', 'CSS', 'Node.js', 'MongoDB']
   },
   {
     title: 'Documentação',
