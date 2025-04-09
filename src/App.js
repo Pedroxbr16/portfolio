@@ -25,11 +25,11 @@ const techIcons = [
 const projects = [
   {
     title: 'Gestão de Clínica',
-    description: 'Sistema de gestão clínica com agenda médica, cadastro de pacientes, controle de estoque e módulo financeiro integrado.',
+    description: 'Sistema de gestão clínica com agenda médica, cadastro de pacientes e módulo financeiro integrado.',
     code: 'https://github.com/Pedroxbr16/clinica-node',
-    demo: '#',
+    demo: 'https://clinica-node.vercel.app/login',
     image: '/clinica.png',
-    tags: ['React', 'Node.js', 'MySQL']
+    tags: ['React', 'CSS', 'Bootstrap', 'Node.js', 'MySQL']
   },
   {
     title: 'Sistema Patrimonial',
@@ -37,7 +37,7 @@ const projects = [
     code: 'https://github.com/Pedroxbr16/patrimonio-react',
     demo: '#',
     image: '/embreve.png',
-    tags: ['React', 'Node.js', 'MongoDB']
+    tags: ['React', 'CSS' 'Node.js', 'MongoDB']
   },
   {
     title: 'Documentação',
@@ -48,12 +48,12 @@ const projects = [
     tags: ['Docusaurus', 'Markdown']
   },
   {
-    title: 'Em Breve',
+    title: 'Sistema de Estoque',
     description: 'Em breve',
-    code: '#',
+    code: 'https://github.com/Pedroxbr16/estoque-php',
     demo: '#',
     image: '/embreve.png',
-    tags: []
+    tags: ['HTML', 'CSS', 'PHP', 'JS']
   }
 ];
 
