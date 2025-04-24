@@ -134,6 +134,7 @@ body {
 .tech-icon:hover .fa-php { color: #777bb4; }
 .tech-icon:hover .fa-java { color: #f89820; }
 .tech-icon:hover .fa-python { color: #3776ab; }
+.tech-icon:hover .fa-docker { color:#0db7ed; }
 .tech-icon p {
   margin-top: 10px;
   color: #ccc;
