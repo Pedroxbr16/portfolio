@@ -49,10 +49,10 @@ const projects = [
   },
   {
     title: 'Sistema de Estoque',
-    description: 'Em breve',
+    description: 'Sistema de controle de estoque com cadastro, edição e organização de materiais por categorias e depósitos.',
     code: 'https://github.com/Pedroxbr16/estoque-php',
     demo: '#',
-    image: '/embreve.png',
+    image: '/estoque.jpg',
     tags: ['HTML', 'CSS', 'PHP', 'JS']
   }
 ];
