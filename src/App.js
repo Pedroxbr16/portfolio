@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHtml5, faCss3Alt, faJs, faReact,
   faNodeJs, faPhp, faJava, faPython,
-  faGithub, faLinkedin, faInstagram
+  faGithub, faLinkedin, faInstagram, 
+  faDocker
 } from '@fortawesome/free-brands-svg-icons';
 import './App.css';
 import ContatoForm from './component/ContatoForm';
@@ -19,7 +20,8 @@ const techIcons = [
   { icon: faNodeJs, label: 'Node.js' },
   { icon: faPhp, label: 'PHP' },
   { icon: faJava, label: 'Java' },
-  { icon: faPython, label: 'Python' }
+  { icon: faPython, label: 'Python' },
+  { icon: faDocker, label: 'Docker' }
 ];
 
 const projects = [
