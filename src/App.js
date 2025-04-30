@@ -55,7 +55,23 @@ const projects = [
     code: 'https://github.com/Pedroxbr16/estoque-php',
     demo: '#',
     image: '/estoque.jpg',
-    tags: ['HTML', 'CSS', 'PHP', 'JS']
+    tags: ['HTML', 'CSS','Bootstrap', 'PHP', 'JS']
+  },
+  {
+    title: 'Encurtador de Links',
+    description: 'Aplicativo web para encurtar URLs de forma rápida e prática, com interface simples e intuitiva.',
+    code: 'https://github.com/Pedroxbr16/encurtador',
+    demo: 'encurtador.streamlit.app',
+    image: '/encurtador.png',
+    tags: [ 'Python', 'Streamlit']
+  },
+  {
+    title: 'Baixador de Vídeos',
+    description: 'Ferramenta em Python com Streamlit para baixar vídeos do YouTube de forma prática.',
+    code: 'https://github.com/Pedroxbr16/baixador_videos',
+    demo: 'baixador-videos.vercel.app',
+    image: '/baixador.png',
+    tags: ['Python', 'Streamlit', 'Pytube']
   }
 ];
 
