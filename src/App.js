@@ -8,9 +8,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import './App.css';
 import ContatoForm from './component/ContatoForm';
-import {  showWarningAlert } from './component/SweetAlert';
-
-
+import { showWarningAlert } from './component/SweetAlert';
 
 const techIcons = [
   { icon: faHtml5, label: 'HTML5' },
@@ -83,6 +81,8 @@ export default function Portfolio() {
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
 
+  const projectCount = projects.length;
+
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   useEffect(() => {
@@ -130,6 +130,7 @@ export default function Portfolio() {
     }, 6000);
     return () => clearInterval(interval);
   }, [cardsPerSlide]);
+
   return (
     <div className="container">
       <header className="navbar">
@@ -140,7 +141,7 @@ export default function Portfolio() {
           <nav className="nav-links">
             <a href="#home">Home</a>
             <a href="#tecnologias">Tecnologias</a>
-            <a href="#projetos">Projetos</a>
+            <a href="#projetos">Projetos ({projectCount})</a>
             <a href="#contato">Contato</a>
           </nav>
           <div className="social-icons">
@@ -163,8 +164,8 @@ export default function Portfolio() {
             <h1>Pedro Justo</h1>
             <p className="subtitle">Desenvolvedor Web</p>
             <p className="description">
-              Sou desenvolvedor fullstack com especialização em aplicações web, atuando com foco em tecnologias como React e Node.js. Tenho  experiência no desenvolvimento de interfaces funcionais e intuitivas, construção de APIs escaláveis e integração de sistemas modernos. 
-            </p> 
+              Sou desenvolvedor fullstack com especialização em aplicações web, atuando com foco em tecnologias como React e Node.js. Tenho  experiência no desenvolvimento de interfaces funcionais e intuitivas, construção de APIs escaláveis e integração de sistemas modernos.
+            </p>
             <p className='description'>
               Tenho como propósito transformar ideias em soluções tecnológicas eficientes, contribuindo diretamente para a otimização de processos e a melhoria da experiência do usuário. Estou em constante atualização, buscando novas ferramentas e conhecimentos que me permitam evoluir continuamente e entregar resultados de excelência.
             </p>
@@ -185,10 +186,9 @@ export default function Portfolio() {
         </div>
       </section>
 
-   
       <section id="projetos" className="projects">
-        <h2>Meus Projetos</h2>
-        <p>Um pouco de alguns projetos pessoais e trabalho que participei</p>
+        <h2>Meus Projetos </h2>
+        <p>Um pouco de alguns projetos pessoais e trabalhos que participei</p>
         <div className="carousel">
           <button className="carousel-btn left" onClick={handlePrev}>&#8592;</button>
           <div
@@ -215,38 +215,20 @@ export default function Portfolio() {
                       </div>
                     </div>
                     <div className="card-buttons">
-  {project.code !== '#' ? (
-    <a href={project.code} target="_blank" rel="noopener noreferrer" className="btn-outline">
-      <FontAwesomeIcon icon={faGithub} className="icon-left" />
-      Código
-    </a>
-  ) : (
-    <button className="btn-outline" onClick={() => showWarningAlert('Link de código ainda não disponível.')}>
-      <FontAwesomeIcon icon={faGithub} className="icon-left" />
-      Código
-    </button>
-  )}
-
-  {project.demo !== '#' ? (
-    <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-black">
-      Demo
-      <svg className="icon-right" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3z"/>
-        <path d="M5 5h4V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-4h-2v4H5V5z"/>
-      </svg>
-    </a>
-  ) : (
-    <button className="btn-black" onClick={() => showWarningAlert('Link da demo ainda não disponível.')}>
-      Demo
-      <svg className="icon-right" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3z"/>
-        <path d="M5 5h4V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-4h-2v4H5V5z"/>
-      </svg>
-    </button>
-  )}
-</div>
-
-
+                      {project.code !== '#' ? (
+                        <a href={project.code} target="_blank" rel="noopener noreferrer" className="btn-outline">
+                          <FontAwesomeIcon icon={faGithub} className="icon-left" />
+                          Código
+                        </a>
+                      ) : (
+                        <button className="btn-outline" onClick={() => showWarningAlert('Link de código ainda não disponível.')}>Código</button>
+                      )}
+                      {project.demo !== '#' ? (
+                        <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-black">Demo</a>
+                      ) : (
+                        <button className="btn-black" onClick={() => showWarningAlert('Link da demo ainda não disponível.')}>Demo</button>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -257,12 +239,9 @@ export default function Portfolio() {
             {Array.from({ length: Math.ceil(projects.length / cardsPerSlide) }).map((_, i) => (
               <span
                 key={i}
-                className={`indicator ${i === index ? 'active' : ''}`}
-                onClick={() => {
+                className={`indicator ${i === index ? 'active' : ''}`} onClick={() => {
                   setIndex(i);
-                  if (carouselRef.current) {
-                    carouselRef.current.style.transform = `translateX(-${i * 100}%)`;
-                  }
+                  carouselRef.current.style.transform = `translateX(-${i * 100}%)`;
                 }}
               />
             ))}
@@ -270,24 +249,16 @@ export default function Portfolio() {
         </div>
       </section>
 
-
       <ContatoForm />
 
       <footer className="footer">
         <div className="social-icons">
-          <a href="https://github.com/Pedroxbr16" target="_blank" rel="noopener noreferrer">
-            <FontAwesomeIcon icon={faGithub} className="github" />
-          </a>
-          <a href="https://www.linkedin.com/in/pedro-justo-463520298/" target="_blank" rel="noopener noreferrer">
-            <FontAwesomeIcon icon={faLinkedin} className="linkedin" />
-          </a>
-          <a href="https://www.instagram.com/pedrojusto_/" target="_blank" rel="noopener noreferrer">
-            <FontAwesomeIcon icon={faInstagram} className="instagram" />
-          </a>
+          <a href="https://github.com/Pedroxbr16" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub} className="github" /></a>
+          <a href="https://www.linkedin.com/in/pedro-justo-463520298/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLinkedin} className="linkedin" /></a>
+          <a href="https://www.instagram.com/pedrojusto_/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faInstagram} className="instagram" /></a>
         </div>
       </footer>
 
-      {/* Botão flutuante para abrir menu */}
       <div className="floating-nav">
         <button className="floating-button" onClick={toggleMenu}>
           <img src="/trace.svg" alt="Menu" className="menu-icon" />
