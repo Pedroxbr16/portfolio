@@ -7,6 +7,8 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment: Production   # <- usa os Environment secrets
+
     steps:
       - uses: actions/checkout@v4
 
@@ -20,7 +22,12 @@ jobs:
         env:
           NODE_OPTIONS: --max_old_space_size=4096
 
-      # Garante o .htaccess para SPA (caso não tenha copiado)
+      - name: Validate required secrets
+        run: |
+          test -n "${{ secrets.FTP_HOST }}" || { echo "Missing secret: FTP_HOST"; exit 1; }
+          test -n "${{ secrets.FTP_USER }}" || { echo "Missing secret: FTP_USER"; exit 1; }
+          test -n "${{ secrets.FTP_PASS }}" || { echo "Missing secret: FTP_PASS"; exit 1; }
+
       - name: Ensure .htaccess in build
         run: |
           if [ -f public/.htaccess ]; then
@@ -28,12 +35,14 @@ jobs:
           fi
 
       - name: Deploy via FTPS
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5   # <- versão existente
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.FTP_HOST }}
+          server:   ${{ secrets.FTP_HOST }}   # ex.: 82.180.153.191 (sem "ftp://")
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
           protocol: ftps
+          port: 21
           local-dir: build/
           server-dir: /public_html/
           dangerous-clean-slate: true
+          timeout: 600
