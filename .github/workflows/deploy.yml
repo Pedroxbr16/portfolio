@@ -12,7 +12,6 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          # Se seu CRA for antigo e der erro, mude para 18
           node-version: 20
           cache: 'npm'
 
@@ -21,14 +20,20 @@ jobs:
         env:
           NODE_OPTIONS: --max_old_space_size=4096
 
+      # Garante o .htaccess para SPA (caso não tenha copiado)
+      - name: Ensure .htaccess in build
+        run: |
+          if [ -f public/.htaccess ]; then
+            cp public/.htaccess build/.htaccess
+          fi
+
       - name: Deploy via FTPS
-        uses: SamKirkland/FTP-Deploy-Action@v4
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5   # <- versão existente
         with:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
           protocol: ftps
           local-dir: build/
-          # ajuste se for domínio adicional/subdomínio:
           server-dir: /public_html/
           dangerous-clean-slate: true
