@@ -1,0 +1,31 @@
+name: CRA → Hostinger FTPS
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - run: npm ci
+      - run: npm run build
+        env:
+          NODE_OPTIONS: --max_old_space_size=4096  # opcional p/ builds grandes
+
+      - name: Deploy via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASS }}
+          protocol: ftps
+          local-dir: build/
+          server-dir: /public_html/
+          dangerous-clean-slate: true
