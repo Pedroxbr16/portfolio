@@ -162,7 +162,7 @@ export default function Portfolio() {
         <div className="intro-content">
           <div className="intro-text">
             <h1>Pedro Justo</h1>
-            <p className="subtitle">Desenvolvedor Web</p>
+            <p className="subtitle">Desenvolvedor FullStack</p>
             <p className="description">
               Sou desenvolvedor fullstack com especialização em aplicações web, atuando com foco em tecnologias como React e Node.js. Tenho  experiência no desenvolvimento de interfaces funcionais e intuitivas, construção de APIs escaláveis e integração de sistemas modernos.
             </p>
