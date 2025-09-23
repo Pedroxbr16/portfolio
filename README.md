@@ -4,7 +4,7 @@ Bem-vindo ao meu portfólio online! Aqui você encontra uma seleção dos meus p
 
 ## 📋 Sobre Mim
 
-- 🎓 Desenvolvedor Web full-stack, especializado em aplicações web  
+- 🎓 Desenvolvedor full-stack, especializado em aplicações web  
 - 💼 Foco em React e Node.js, com experiência em interfaces funcionais e APIs escaláveis  
 - 🌐 Compromisso com soluções tecnológicas eficientes e melhoria da experiência do usuário  
 
