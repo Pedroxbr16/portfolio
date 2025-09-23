@@ -17,7 +17,6 @@ const techIcons = [
   { icon: faReact, label: 'React' },
   { icon: faNodeJs, label: 'Node.js' },
   { icon: faPhp, label: 'PHP' },
-  { icon: faJava, label: 'Java' },
   { icon: faPython, label: 'Python' },
   { icon: faDocker, label: 'Docker' }
 ];
