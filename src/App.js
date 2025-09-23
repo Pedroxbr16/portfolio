@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHtml5, faCss3Alt, faJs, faReact,
-  faNodeJs, faPhp, faJava, faPython,
+  faNodeJs, faPhp, faPython,
   faGithub, faLinkedin, faInstagram, 
   faDocker
 } from '@fortawesome/free-brands-svg-icons';
