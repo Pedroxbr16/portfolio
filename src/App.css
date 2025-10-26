@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Tomorrow:wght@400;500;600;700&display=swap');
 
-
 /* Reset */
 html {
   scroll-behavior: smooth;
@@ -26,7 +25,7 @@ body {
 
 .github,
 .instagram,
-.linkedin{
+.linkedin {
   width: 32px;
   height: 32px;
 }
@@ -63,6 +62,69 @@ body {
   color: #fff;
   cursor: pointer;
 }
+
+/* Ícones sociais com hover animado */
+.social-icons a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.social-icons a svg {
+  color: #fff;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  background-color: #fff;
+  transform: translateY(-3px) scale(1.1);
+}
+
+.social-icons a:hover svg {
+  color: #000;
+}
+
+.social-icons a:hover .github { color: #171515; }
+.social-icons a:hover .linkedin { color: #0077b5; }
+.social-icons a:hover .instagram { color: #e4405f; }
+
+.tech-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: brightness(1);
+  vertical-align: middle;
+}
+
+.tech-icon img.tech-img {
+  display: inline-block;
+  position: relative;
+  top: 4px;
+}
+
+/* Hover verde para EJS */
+.tech-icon:hover img[src*="ejs.svg"] {
+  filter: brightness(0) saturate(100%) invert(74%) sepia(27%) saturate(564%) hue-rotate(44deg) brightness(100%) contrast(97%);
+}
+
+/* Hover azul para SQL */
+.tech-icon:hover img[src*="sql.svg"] {
+  filter: brightness(0) saturate(100%) invert(52%) sepia(97%) saturate(2688%) hue-rotate(167deg) brightness(97%) contrast(101%);
+}
+
+/* Hover verde MongoDB */
+.tech-icon:hover img[src*="mongo.svg"] {
+  filter: brightness(0) saturate(100%) invert(39%) sepia(90%) saturate(438%) hue-rotate(85deg) brightness(96%) contrast(93%);
+}
+
+
 
 /* Intro */
 .intro {
@@ -147,33 +209,37 @@ body {
   text-align: center;
   background-color: #080808;
 }
-.carousel {
-  position: relative;
-  overflow: hidden;
-  max-width: 1000px;
-  margin: 0 auto;
+
+/* GRID PRINCIPAL DOS PROJETOS */
+.projects-grid {
+  max-width: 1100px;
+  margin: 60px auto;
+  display: grid;  
+  gap: 2rem;
+  grid-template-columns: 1fr;
 }
-.carousel-track {
-  display: flex;
-  transition: transform 0.5s ease;
+
+/* no desktop / tablet grande: 2 cards por linha */
+@media (min-width: 768px) {
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
-.carousel-slide {
-  display: flex;
-  flex: 0 0 100%;
-  justify-content: space-around;
-  gap: 20px;
-}
+
+/* CARD DO PROJETO */
 .project-card {
-  background: white;
-  color: black;
-  width: 30%;
-  padding: 20px;
+  background: #fff;
+  color: #000;
   border-radius: 12px;
+  padding: 20px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
+
+/* imagem do card */
 .card-image-placeholder {
   width: 100%;
   height: 160px;
@@ -186,6 +252,7 @@ body {
   height: 100%;
   object-fit: cover;
 }
+
 .card-info {
   text-align: center;
 }
@@ -198,6 +265,8 @@ body {
   color: #333;
   margin: 10px 0;
 }
+
+/* tags */
 .card-tags {
   display: flex;
   flex-wrap: wrap;
@@ -211,13 +280,17 @@ body {
   padding: 4px 8px;
   border-radius: 12px;
 }
+
+/* botões */
 .card-buttons {
   display: flex;
   justify-content: space-between;
   gap: 12px;
   margin-top: 20px;
+  flex-wrap: wrap;
 }
-.btn-outline, .btn-black {
+.btn-outline,
+.btn-black {
   padding: 6px 10px;
   font-size: 14px;
   border-radius: 6px;
@@ -225,6 +298,7 @@ body {
   display: flex;
   align-items: center;
   gap: 6px;
+  cursor: pointer;
 }
 .btn-outline {
   display: flex;
@@ -251,49 +325,19 @@ body {
   background-color: #111;
   color: white;
   text-decoration: none;
+  border: 1px solid #111;
   transition: 0.3s ease;
 }
-
 .btn-outline:hover {
   background: #f0f0f0;
 }
 .btn-black:hover {
   background-color: #222;
 }
-.icon-left, .icon-right {
+.icon-left,
+.icon-right {
   width: 16px;
   height: 16px;
-}
-/* Carousel */
-.carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  font-size: 28px;
-  color: white;
-  cursor: pointer;
-  z-index: 2;
-}
-.carousel-btn.left { left: 10px; }
-.carousel-btn.right { right: 10px; }
-
-.carousel-indicators {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
-}
-.indicator {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #ccc;
-  cursor: pointer;
-}
-.indicator.active {
-  background: #0061f1;
 }
 
 /* Footer */
@@ -343,37 +387,30 @@ body {
 }
 
 /* Responsivo */
-@media (max-width: 1024px) {
-  .carousel-slide { gap: 10px; }
-  .project-card { width: 45%; }
-}
 @media (max-width: 768px) {
-  .nav-container { gap: 15px; }
-  .nav-links { display: none; }
+  .nav-container {
+    gap: 15px;
+  }
+
+  .nav-links {
+    display: none;
+  }
 
   .intro-content {
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
+
   .profile-img {
     width: 200px;
     height: 200px;
   }
 
-  .carousel-slide {
-    flex-direction: column;
-    align-items: center;
-  }
-  .project-card {
-    width: 85%;
-  }
+  /* grid já cai pra 1 coluna no mobile via grid-template-columns,
+     então não precisa mexer em .project-card aqui */
 
-  .carousel-btn {
-    display: none;
-  }
-
-  .contact-form{
+  .contact-form {
     margin: 0 35px 100px;
   }
 

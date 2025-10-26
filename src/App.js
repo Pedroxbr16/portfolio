@@ -1,10 +1,10 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHtml5, faCss3Alt, faJs, faReact,
   faNodeJs, faPhp, faPython,
-  faGithub, faLinkedin, faInstagram, 
-  faDocker
+  faGithub, faLinkedin, faInstagram,
+  faDocker, fasql
 } from '@fortawesome/free-brands-svg-icons';
 import './App.css';
 import ContatoForm from './component/ContatoForm';
@@ -18,7 +18,10 @@ const techIcons = [
   { icon: faNodeJs, label: 'Node.js' },
   { icon: faPhp, label: 'PHP' },
   { icon: faPython, label: 'Python' },
-  { icon: faDocker, label: 'Docker' }
+  { icon: faDocker, label: 'Docker' },
+  { icon: '/ejs.svg', label: 'EJS', isImage: true },
+  { icon: '/sql.svg', label: 'SQL', isImage: true }, 
+  { icon: '/mongo.svg', label: 'MongoDB', isImage: true },
 ];
 
 const projects = [
@@ -31,14 +34,6 @@ const projects = [
     tags: ['React', 'CSS', 'Bootstrap', 'Node.js', 'MySQL']
   },
   {
-    title: 'Sistema Patrimonial',
-    description: 'Sistema de controle de bens com cadastro, edição e geração de termos de responsabilidade para empréstimos.',
-    code: 'https://github.com/Pedroxbr16/patrimonio-react',
-    demo: '#',
-    image: '/embreve.png',
-    tags: ['React', 'CSS', 'Node.js', 'MongoDB']
-  },
-  {
     title: 'Documentação',
     description: 'Documentação criada com Docusaurus para organizar conteúdos técnicos.',
     code: 'https://github.com/Pedroxbr16/documentacao-geral',
@@ -47,88 +42,27 @@ const projects = [
     tags: ['Docusaurus', 'Markdown']
   },
   {
-    title: 'Sistema de Estoque',
-    description: 'Sistema de controle de estoque com cadastro, edição e organização de materiais por categorias e depósitos.',
-    code: 'https://github.com/Pedroxbr16/estoque-php',
-    demo: '#',
-    image: '/estoque.jpg',
-    tags: ['HTML', 'CSS','Bootstrap', 'PHP', 'JS']
-  },
-  {
     title: 'Encurtador de Links',
     description: 'Aplicativo web para encurtar URLs de forma rápida e prática, com interface simples e intuitiva.',
     code: 'https://github.com/Pedroxbr16/encurtador',
-    demo: 'encurtador.streamlit.app',
+    demo: 'https://encurtador.streamlit.app',
     image: '/encurtador.png',
-    tags: [ 'Python', 'Streamlit']
+    tags: ['Python', 'Streamlit']
   },
   {
     title: 'Baixador de Vídeos',
     description: 'Ferramenta em Python com Streamlit para baixar vídeos do YouTube de forma prática.',
     code: 'https://github.com/Pedroxbr16/baixador_videos',
-    demo: 'baixador-videos.vercel.app',
+    demo: 'https://baixador-videos.vercel.app',
     image: '/baixador.png',
     tags: ['Python', 'Streamlit', 'Pytube']
   }
 ];
 
 export default function Portfolio() {
-  const [index, setIndex] = useState(0);
-  const [cardsPerSlide, setCardsPerSlide] = useState(window.innerWidth < 768 ? 1 : 2);
-  const carouselRef = useRef();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [touchStart, setTouchStart] = useState(null);
-  const [touchEnd, setTouchEnd] = useState(null);
-
   const projectCount = projects.length;
-
   const toggleMenu = () => setMenuOpen(!menuOpen);
-
-  useEffect(() => {
-    const updateCardsPerSlide = () => setCardsPerSlide(window.innerWidth < 768 ? 1 : 2);
-    window.addEventListener('resize', updateCardsPerSlide);
-    return () => window.removeEventListener('resize', updateCardsPerSlide);
-  }, []);
-
-  const handleNext = () => {
-    const maxIndex = Math.ceil(projects.length / cardsPerSlide) - 1;
-    const nextIndex = (index + 1) > maxIndex ? 0 : index + 1;
-    setIndex(nextIndex);
-    carouselRef.current.style.transform = `translateX(-${nextIndex * 100}%)`;
-  };
-
-  const handlePrev = () => {
-    const maxIndex = Math.ceil(projects.length / cardsPerSlide) - 1;
-    const prevIndex = (index - 1 + maxIndex + 1) % (maxIndex + 1);
-    setIndex(prevIndex);
-    carouselRef.current.style.transform = `translateX(-${prevIndex * 100}%)`;
-  };
-
-  const handleTouchStart = (e) => setTouchStart(e.targetTouches[0].clientX);
-  const handleTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
-
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
-    if (distance > 50) handleNext();
-    else if (distance < -50) handlePrev();
-    setTouchStart(null);
-    setTouchEnd(null);
-  };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const maxIndex = Math.ceil(projects.length / cardsPerSlide) - 1;
-      setIndex(prev => {
-        const next = (prev + 1) > maxIndex ? 0 : prev + 1;
-        if (carouselRef.current) {
-          carouselRef.current.style.transform = `translateX(-${next * 100}%)`;
-        }
-        return next;
-      });
-    }, 6000);
-    return () => clearInterval(interval);
-  }, [cardsPerSlide]);
 
   return (
     <div className="container">
@@ -163,10 +97,19 @@ export default function Portfolio() {
             <h1>Pedro Justo</h1>
             <p className="subtitle">Desenvolvedor FullStack</p>
             <p className="description">
-              Sou desenvolvedor fullstack com especialização em aplicações web, atuando com foco em tecnologias como React e Node.js. Tenho  experiência no desenvolvimento de interfaces funcionais e intuitivas, construção de APIs escaláveis e integração de sistemas modernos.
+              Sou desenvolvedor fullstack com especialização em aplicações web,
+              atuando com foco em tecnologias como React e Node.js. Tenho
+              experiência no desenvolvimento de interfaces funcionais e
+              intuitivas, construção de APIs escaláveis e integração de sistemas
+              modernos.
             </p>
-            <p className='description'>
-              Tenho como propósito transformar ideias em soluções tecnológicas eficientes, contribuindo diretamente para a otimização de processos e a melhoria da experiência do usuário. Estou em constante atualização, buscando novas ferramentas e conhecimentos que me permitam evoluir continuamente e entregar resultados de excelência.
+            <p className="description">
+              Tenho como propósito transformar ideias em soluções tecnológicas
+              eficientes, contribuindo diretamente para a otimização de
+              processos e a melhoria da experiência do usuário. Estou em
+              constante atualização, buscando novas ferramentas e conhecimentos
+              que me permitam evoluir continuamente e entregar resultados de
+              excelência.
             </p>
           </div>
           <img src="/user.png" alt="Pedro Justo" className="profile-img" />
@@ -178,7 +121,11 @@ export default function Portfolio() {
         <div className="tech-icons-container">
           {techIcons.map((tech, index) => (
             <div key={index} className="tech-icon">
-              <FontAwesomeIcon icon={tech.icon} size="3x" />
+              {tech.isImage ? (
+                <img src={tech.icon} alt={tech.label} className="tech-img" />
+              ) : (
+                <FontAwesomeIcon icon={tech.icon} size="3x" />
+              )}
               <p>{tech.label}</p>
             </div>
           ))}
@@ -186,65 +133,46 @@ export default function Portfolio() {
       </section>
 
       <section id="projetos" className="projects">
-        <h2>Meus Projetos </h2>
+        <h2>Meus Projetos</h2>
         <p>Um pouco de alguns projetos pessoais e trabalhos que participei</p>
-        <div className="carousel">
-          <button className="carousel-btn left" onClick={handlePrev}>&#8592;</button>
-          <div
-            className="carousel-track"
-            ref={carouselRef}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-          >
-            {Array.from({ length: Math.ceil(projects.length / cardsPerSlide) }).map((_, groupIndex) => (
-              <div className="carousel-slide" key={groupIndex}>
-                {projects.slice(groupIndex * cardsPerSlide, groupIndex * cardsPerSlide + cardsPerSlide).map((project, index) => (
-                  <div className="project-card" key={index}>
-                    <div className="card-image-placeholder">
-                      <img src={project.image} alt={project.title} className="project-image" />
-                    </div>
-                    <div className="card-info">
-                      <h3 className="card-title">{project.title}</h3>
-                      <p className="card-description">{project.description}</p>
-                      <div className="card-tags">
-                        {project.tags.map(tag => (
-                          <span key={tag} className="card-tag">{tag}</span>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="card-buttons">
-                      {project.code !== '#' ? (
-                        <a href={project.code} target="_blank" rel="noopener noreferrer" className="btn-outline">
-                          <FontAwesomeIcon icon={faGithub} className="icon-left" />
-                          Código
-                        </a>
-                      ) : (
-                        <button className="btn-outline" onClick={() => showWarningAlert('Link de código ainda não disponível.')}>Código</button>
-                      )}
-                      {project.demo !== '#' ? (
-                        <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-black">Demo</a>
-                      ) : (
-                        <button className="btn-black" onClick={() => showWarningAlert('Link da demo ainda não disponível.')}>Demo</button>
-                      )}
-                    </div>
-                  </div>
-                ))}
+
+        <div className="projects-grid">
+          {projects.map((project, idx) => (
+            <div className="project-card" key={idx}>
+              <div className="card-image-placeholder">
+                <img src={project.image} alt={project.title} className="project-image" />
               </div>
-            ))}
-          </div>
-          <button className="carousel-btn right" onClick={handleNext}>&#8594;</button>
-          <div className="carousel-indicators">
-            {Array.from({ length: Math.ceil(projects.length / cardsPerSlide) }).map((_, i) => (
-              <span
-                key={i}
-                className={`indicator ${i === index ? 'active' : ''}`} onClick={() => {
-                  setIndex(i);
-                  carouselRef.current.style.transform = `translateX(-${i * 100}%)`;
-                }}
-              />
-            ))}
-          </div>
+
+              <div className="card-info">
+                <h3 className="card-title">{project.title}</h3>
+                <p className="card-description">{project.description}</p>
+                <div className="card-tags">
+                  {project.tags.map((tag) => (
+                    <span key={tag} className="card-tag">{tag}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="card-buttons">
+                {project.code !== '#' ? (
+                  <a href={project.code} target="_blank" rel="noopener noreferrer" className="btn-outline">
+                    <FontAwesomeIcon icon={faGithub} className="icon-left" />
+                    Código
+                  </a>
+                ) : (
+                  <button className="btn-outline" onClick={() => showWarningAlert('Link de código ainda não disponível.')}>Código</button>
+                )}
+
+                {project.demo !== '#' ? (
+                  <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-black">
+                    Demo
+                  </a>
+                ) : (
+                  <button className="btn-black" onClick={() => showWarningAlert('Link da demo ainda não disponível.')}>Demo</button>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -252,9 +180,15 @@ export default function Portfolio() {
 
       <footer className="footer">
         <div className="social-icons">
-          <a href="https://github.com/Pedroxbr16" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub} className="github" /></a>
-          <a href="https://www.linkedin.com/in/pedro-justo-463520298/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLinkedin} className="linkedin" /></a>
-          <a href="https://www.instagram.com/pedrojusto_/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faInstagram} className="instagram" /></a>
+          <a href="https://github.com/Pedroxbr16" target="_blank" rel="noopener noreferrer">
+            <FontAwesomeIcon icon={faGithub} className="github" />
+          </a>
+          <a href="https://www.linkedin.com/in/pedro-justo-463520298/" target="_blank" rel="noopener noreferrer">
+            <FontAwesomeIcon icon={faLinkedin} className="linkedin" />
+          </a>
+          <a href="https://www.instagram.com/pedrojusto_/" target="_blank" rel="noopener noreferrer">
+            <FontAwesomeIcon icon={faInstagram} className="instagram" />
+          </a>
         </div>
       </footer>
 
