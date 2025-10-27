@@ -165,10 +165,10 @@ export default function Portfolio() {
 
                 {project.demo !== '#' ? (
                   <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-black">
-                    Demo
+                    Ver Projeto
                   </a>
                 ) : (
-                  <button className="btn-black" onClick={() => showWarningAlert('Link da demo ainda não disponível.')}>Demo</button>
+                  <button className="btn-black" onClick={() => showWarningAlert('Link de demonstração ainda não disponível.')}>Ver Projeto</button>
                 )}
               </div>
             </div>
