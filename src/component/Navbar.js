@@ -5,39 +5,44 @@ import {
   faLinkedin,
   faInstagram,
 } from '@fortawesome/free-brands-svg-icons';
-
 import '../assets/css/Navbar.css';
 
-export default function Navbar({ projectCount, showLinks = true }) {
+export default function Navbar({
+  projectCount,
+  showLinks = true,
+  variant, // 'portfolio' ou 'hub'
+}) {
   return (
-    <header className="navbar">
+    <header
+      className={`navbar ${
+        variant === 'portfolio' ? 'navbar--portfolio' : 'navbar--hub'
+      }`}
+    >
       <div className="nav-container">
-
         {/* ESQUERDA: logo */}
-        <div className="logo">
+        <div className="nav-left">
           <img src="/favicon.png" alt="Logo" className="logo-img" />
         </div>
 
-        {/* CENTRO: links de navegação (só se showLinks === true) */}
+        {/* CENTRO: links ou placeholder */}
         {showLinks ? (
           <nav className="nav-links">
             <a href="#home">Home</a>
             <a href="#tecnologias">Tecnologias</a>
             <a href="#projetos">
-              Projetos{" "}
-              {typeof projectCount === "number" ? `(${projectCount})` : ""}
+              Projetos{' '}
+              {typeof projectCount === 'number' ? `(${projectCount})` : ''}
             </a>
             <a href="#contato">Contato</a>
           </nav>
         ) : (
-          // se não for pra mostrar os links, a gente ainda coloca um placeholder vazio
-          // pra manter o grid 3 colunas da navbar centralizado
-          <div className="nav-links" style={{ visibility: "hidden" }}>
+          // placeholder some via CSS (.nav-links--placeholder { display: none; })
+          <nav className="nav-links nav-links--placeholder" aria-hidden="true">
             <a>_</a>
             <a>_</a>
             <a>_</a>
             <a>_</a>
-          </div>
+          </nav>
         )}
 
         {/* DIREITA: redes sociais */}

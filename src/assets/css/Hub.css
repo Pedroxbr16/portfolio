@@ -1,10 +1,11 @@
-
 .hub-page {
   background-color: #1f1f1f;
   min-height: 100vh;
   color: #fff;
+  font-family: 'Orbitron', system-ui, sans-serif;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;       /* <- garante nada vaza pros lados */
 }
 
 /* área central */
@@ -14,6 +15,7 @@
   align-items: center;
   justify-content: center;
   padding: 40px 16px;
+  box-sizing: border-box;
 }
 
 /* linha de botões */
@@ -36,7 +38,6 @@
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 8px 24px rgba(77, 211, 245, 0.2);
 
-  /* animação suave */
   transition: all 0.22s ease;
   will-change: transform, box-shadow, background-color;
   cursor: pointer;
@@ -53,24 +54,30 @@
   line-height: 1.2;
 }
 
-/* HOVER ANIMADO */
+/* hover */
 .hub-button:hover {
   transform: translateY(-4px) scale(1.03);
   box-shadow: 0 16px 32px rgba(77, 211, 245, 0.35);
-  background-color: #3ac2e6; /* levemente mais escuro que #4dd3f5 */
+  background-color: #3ac2e6;
 }
 
-/* foco teclado (acessibilidade) */
+/* foco teclado */
 .hub-button:focus {
   outline: 2px solid #ffffffaa;
   outline-offset: 3px;
   box-shadow: 0 0 0 4px rgba(77, 211, 245, 0.4);
 }
 
-/* responsividade */
+/* responsivo: empilhar botões no mobile */
 @media (max-width: 480px) {
+  .hub-buttons-row {
+    width: 100%;
+    max-width: 320px;
+  }
+
   .hub-button {
-    min-width: 160px;
+    width: 100%;
+    min-width: unset;
     padding: 16px 20px;
     border-radius: 14px;
   }

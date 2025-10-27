@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import Navbar from "../component/Navbar"; 
-import "../assets/css/Hub.css"; 
+import Navbar from "../component/Navbar";
+import "../assets/css/Hub.css";
 
 function Hub() {
   return (
     <div className="hub-page">
-      <Navbar showLinks={false} />
+      <Navbar showLinks={false} variant="hub" />
 
       <main className="hub-main">
         <div className="hub-buttons-row">
@@ -18,7 +18,7 @@ function Hub() {
           </Link>
 
           <a
-            href="https://pemtech.vercel.app"
+            href="https://documentacao-geral.vercel.app/"
             className="hub-button"
             target="_blank"
             rel="noopener noreferrer"

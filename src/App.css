@@ -13,43 +13,18 @@ body {
 }
 .container {
   width: 100%;
-}
-.tech-img {
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
-  transition: transform 0.3s ease, filter 0.3s ease;
-  filter: brightness(1);
-  vertical-align: middle;
+  max-width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
-.tech-icon img.tech-img {
-  display: inline-block;
-  position: relative;
-  top: 4px;
-}
-
-/* Hover verde para EJS */
-.tech-icon:hover img[src*="ejs.svg"] {
-  filter: brightness(0) saturate(100%) invert(74%) sepia(27%) saturate(564%) hue-rotate(44deg) brightness(100%) contrast(97%);
-}
-
-/* Hover azul para SQL */
-.tech-icon:hover img[src*="sql.svg"] {
-  filter: brightness(0) saturate(100%) invert(52%) sepia(97%) saturate(2688%) hue-rotate(167deg) brightness(97%) contrast(101%);
-}
-
-/* Hover verde MongoDB */
-.tech-icon:hover img[src*="mongo.svg"] {
-  filter: brightness(0) saturate(100%) invert(39%) sepia(90%) saturate(438%) hue-rotate(85deg) brightness(96%) contrast(93%);
-}
-
-
-
-/* Intro */
+/* ---------- INTRO / HERO ---------- */
 .intro {
   background: url('../public/background.png') no-repeat center/cover;
   padding: 84px 40px 0;
+  box-sizing: border-box;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 .intro-content {
   display: flex;
@@ -58,6 +33,7 @@ body {
   max-width: 1100px;
   margin: 0 auto;
   gap: 40px;
+  box-sizing: border-box;
 }
 .intro-text {
   max-width: 600px;
@@ -65,16 +41,15 @@ body {
 .intro-text h1 {
   margin: 0;
   font-size: 32px;
-}
-.profile-img {
-  width: 370px;
-  height: 370px;
-  object-fit: cover;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
 }
 .subtitle {
   font-size: 32px;
   color: #ccc;
   margin: 0;
+  line-height: 1.2;
 }
 .description {
   color: #aaa;
@@ -82,8 +57,14 @@ body {
   text-align: justify;
   margin: 20px auto;
 }
+.profile-img {
+  width: 370px;
+  height: 370px;
+  object-fit: cover;
+  border-radius: 4px;
+}
 
-/* Tecnologias */
+/* ---------- TECNOLOGIAS ---------- */
 .tech-section {
   background: #000;
   padding: 30px 10px;
@@ -108,6 +89,25 @@ body {
 .tech-icon:hover {
   transform: scale(1.1);
 }
+.tech-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: brightness(1);
+  vertical-align: middle;
+}
+.tech-icon img.tech-img {
+  display: inline-block;
+  position: relative;
+  top: 4px;
+}
+.tech-icon p {
+  margin-top: 10px;
+  color: #ccc;
+  font-weight: bold;
+}
+
 .tech-icon:hover .fa-html5 { color: #e44d26; }
 .tech-icon:hover .fa-css3-alt { color: #264de4; }
 .tech-icon:hover .fa-js { color: #f0db4f; }
@@ -117,36 +117,35 @@ body {
 .tech-icon:hover .fa-java { color: #f89820; }
 .tech-icon:hover .fa-python { color: #3776ab; }
 .tech-icon:hover .fa-docker { color:#0db7ed; }
-.tech-icon p {
-  margin-top: 10px;
-  color: #ccc;
-  font-weight: bold;
+
+.tech-icon:hover img[src*="ejs.svg"] {
+  filter: brightness(0) saturate(100%) invert(74%) sepia(27%) saturate(564%) hue-rotate(44deg) brightness(100%) contrast(97%);
+}
+.tech-icon:hover img[src*="sql.svg"] {
+  filter: brightness(0) saturate(100%) invert(52%) sepia(97%) saturate(2688%) hue-rotate(167deg) brightness(97%) contrast(101%);
+}
+.tech-icon:hover img[src*="mongo.svg"] {
+  filter: brightness(0) saturate(100%) invert(39%) sepia(90%) saturate(438%) hue-rotate(85deg) brightness(96%) contrast(93%);
 }
 
-/* Projetos */
+/* ---------- PROJETOS ---------- */
 .projects {
   padding: 40px 20px;
   text-align: center;
   background-color: #080808;
 }
-
-/* GRID PRINCIPAL DOS PROJETOS */
 .projects-grid {
   max-width: 1100px;
   margin: 60px auto;
-  display: grid;  
+  display: grid;
   gap: 2rem;
   grid-template-columns: 1fr;
 }
-
-/* no desktop / tablet grande: 2 cards por linha */
 @media (min-width: 768px) {
   .projects-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-
-/* CARD DO PROJETO */
 .project-card {
   background: #fff;
   color: #000;
@@ -158,8 +157,6 @@ body {
   align-items: center;
   text-align: center;
 }
-
-/* imagem do card */
 .card-image-placeholder {
   width: 100%;
   height: 160px;
@@ -172,7 +169,6 @@ body {
   height: 100%;
   object-fit: cover;
 }
-
 .card-info {
   text-align: center;
 }
@@ -185,8 +181,6 @@ body {
   color: #333;
   margin: 10px 0;
 }
-
-/* tags */
 .card-tags {
   display: flex;
   flex-wrap: wrap;
@@ -200,8 +194,6 @@ body {
   padding: 4px 8px;
   border-radius: 12px;
 }
-
-/* botões */
 .card-buttons {
   display: flex;
   justify-content: space-between;
@@ -260,18 +252,7 @@ body {
   height: 16px;
 }
 
-/* Footer */
-.footer {
-  padding: 20px;
-  background: #111;
-  border-top: 1px solid #333;
-  text-align: center;
-}
-.footer .social-icons {
-  justify-content: center;
-}
-
-/* Contato */
+/* ---------- CONTATO ---------- */
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -301,39 +282,75 @@ body {
   text-align: center;
 }
 
-/* Floating Menu */
+/* ---------- FOOTER ---------- */
+.footer {
+  padding: 20px;
+  background: #111;
+  border-top: 1px solid #333;
+  text-align: center;
+}
+.footer .social-icons {
+  justify-content: center;
+}
+
+/* ---------- MENU FLUTUANTE MOBILE ---------- */
 .floating-nav {
   display: none;
 }
 
-/* Responsivo */
+/* ---------- RESPONSIVIDADE GERAL ---------- */
 @media (max-width: 768px) {
-  .nav-container {
-    gap: 15px;
-  }
-
-  .nav-links {
-    display: none;
+  /* hero mais compacto no mobile */
+  .intro {
+    padding: 40px 20px 0;
+    background-position: center top;
+    background-size: cover;
   }
 
   .intro-content {
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
+    max-width: 360px;
+    margin: 0 auto;
+    gap: 24px;
+  }
+
+  .intro-text h1 {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+  .subtitle {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+  .description {
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 16px 0;
+    text-align: left;
   }
 
   .profile-img {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
+    align-self: center;
   }
 
-  /* grid já cai pra 1 coluna no mobile via grid-template-columns,
-     então não precisa mexer em .project-card aqui */
+  .projects {
+    padding: 32px 16px;
+  }
+  .projects-grid {
+    margin: 32px auto;
+    gap: 1.5rem;
+  }
 
   .contact-form {
-    margin: 0 35px 100px;
+    margin: 0 20px 80px;
+    max-width: 100%;
   }
 
+  /* menu flutuante visível no mobile */
   .floating-nav {
     display: block;
     position: fixed;
@@ -363,6 +380,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    border: 1px solid #333;
   }
   .floating-menu a {
     color: white;

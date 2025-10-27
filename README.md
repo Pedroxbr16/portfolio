@@ -34,3 +34,8 @@ Bem-vindo ao meu portfólio online! Aqui você encontra uma seleção dos meus p
 - 🐱 GitHub: https://github.com/Pedroxbr16  
 - 🔗 LinkedIn: https://www.linkedin.com/in/pedro-justo  
 - 📸 Instagram: https://www.instagram.com/pedroxbr16  
+
+
+
+
+      

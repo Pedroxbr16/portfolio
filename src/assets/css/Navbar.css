@@ -3,6 +3,10 @@
   border-bottom: 1px solid #333;
   padding: 20px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 100vw;        /* <- impede estourar a viewport */
+  overflow-x: hidden;      /* <- não deixa transbordar horizontal */
+  box-sizing: border-box;  /* <- padding conta dentro da largura */
 }
 
 .github,
@@ -11,35 +15,52 @@
   width: 32px;
   height: 32px;
 }
+
 .logo-img {
   width: 48px;
   height: 48px;
   object-fit: contain;
 }
+
 .nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 40px;
   flex-wrap: wrap;
+  margin: 0 auto;
+  box-sizing: border-box;
+  width: 100%;
 }
+
+/* LINKS (meio) */
 .nav-links {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
 }
+
 .nav-links a {
   color: #fff;
   text-decoration: none;
   font-weight: bold;
 }
+
 .nav-links a:hover {
   color: #027e97;
 }
+
+/* isso some os "____" do hub */
+.nav-links--placeholder {
+  display: none;
+}
+
+/* SOCIAL (direita) */
 .social-icons {
   display: flex;
   gap: 10px;
 }
+
 .social-icons svg {
   color: #fff;
   cursor: pointer;
@@ -75,3 +96,45 @@
 .social-icons a:hover .github { color: #171515; }
 .social-icons a:hover .linkedin { color: #0077b5; }
 .social-icons a:hover .instagram { color: #e4405f; }
+
+/* ===================== */
+/*   RESPONSIVIDADE      */
+/* ===================== */
+
+@media (max-width: 768px) {
+  /* navbar inteira some no mobile QUANDO for a versão do portfólio */
+  .navbar.navbar--portfolio {
+    display: none;
+  }
+
+  /* mantém a do hub visível */
+  .navbar.navbar--hub {
+    display: block;
+  }
+
+  /* reduzir paddings pra caber 100% sem criar overflow */
+  .nav-container {
+    padding: 0 16px;
+    row-gap: 12px;
+  }
+
+  /* links podem quebrar linha bonitinho */
+  .nav-links {
+    flex-basis: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+  }
+
+  .social-icons a {
+    width: 36px;
+    height: 36px;
+  }
+
+  .social-icons a svg {
+    font-size: 16px;
+  }
+}

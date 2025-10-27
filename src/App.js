@@ -67,7 +67,12 @@ export default function Portfolio() {
 
   return (
     <div className="container">
-      <Navbar projectCount={projectCount} showLinks={true} />
+      <Navbar
+        showLinks={true}
+        projectCount={projectCount}
+        variant="portfolio"
+      />
+
       {/* HOME */}
       <section id="home" className="intro">
         <div className="intro-content">
