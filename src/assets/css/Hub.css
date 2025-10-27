@@ -1,0 +1,81 @@
+
+.hub-page {
+  background-color: #1f1f1f;
+  min-height: 100vh;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* área central */
+.hub-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+}
+
+/* linha de botões */
+.hub-buttons-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+}
+
+/* botão grande azul */
+.hub-button {
+  background-color: #4dd3f5;
+  color: #000;
+  text-decoration: none;
+  border-radius: 16px;
+  padding: 20px 28px;
+  min-width: 200px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 24px rgba(77, 211, 245, 0.2);
+
+  /* animação suave */
+  transition: all 0.22s ease;
+  will-change: transform, box-shadow, background-color;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* texto interno */
+.hub-button-text {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* HOVER ANIMADO */
+.hub-button:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 16px 32px rgba(77, 211, 245, 0.35);
+  background-color: #3ac2e6; /* levemente mais escuro que #4dd3f5 */
+}
+
+/* foco teclado (acessibilidade) */
+.hub-button:focus {
+  outline: 2px solid #ffffffaa;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(77, 211, 245, 0.4);
+}
+
+/* responsividade */
+@media (max-width: 480px) {
+  .hub-button {
+    min-width: 160px;
+    padding: 16px 20px;
+    border-radius: 14px;
+  }
+
+  .hub-button-text {
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,77 @@
+.navbar {
+  background-color: #000;
+  border-bottom: 1px solid #333;
+  padding: 20px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+.github,
+.instagram,
+.linkedin {
+  width: 32px;
+  height: 32px;
+}
+.logo-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  flex-wrap: wrap;
+}
+.nav-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+.nav-links a:hover {
+  color: #027e97;
+}
+.social-icons {
+  display: flex;
+  gap: 10px;
+}
+.social-icons svg {
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Ícones sociais com hover animado */
+.social-icons a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.social-icons a svg {
+  color: #fff;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  background-color: #fff;
+  transform: translateY(-3px) scale(1.1);
+}
+
+.social-icons a:hover svg {
+  color: #000;
+}
+
+.social-icons a:hover .github { color: #171515; }
+.social-icons a:hover .linkedin { color: #0077b5; }
+.social-icons a:hover .instagram { color: #e4405f; }

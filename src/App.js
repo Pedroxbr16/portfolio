@@ -4,9 +4,10 @@ import {
   faHtml5, faCss3Alt, faJs, faReact,
   faNodeJs, faPhp, faPython,
   faGithub, faLinkedin, faInstagram,
-  faDocker, fasql
+  faDocker
 } from '@fortawesome/free-brands-svg-icons';
 import './App.css';
+import Navbar from './component/Navbar';
 import ContatoForm from './component/ContatoForm';
 import { showWarningAlert } from './component/SweetAlert';
 
@@ -20,7 +21,7 @@ const techIcons = [
   { icon: faPython, label: 'Python' },
   { icon: faDocker, label: 'Docker' },
   { icon: '/ejs.svg', label: 'EJS', isImage: true },
-  { icon: '/sql.svg', label: 'SQL', isImage: true }, 
+  { icon: '/sql.svg', label: 'SQL', isImage: true },
   { icon: '/mongo.svg', label: 'MongoDB', isImage: true },
 ];
 
@@ -66,36 +67,14 @@ export default function Portfolio() {
 
   return (
     <div className="container">
-      <header className="navbar">
-        <div className="nav-container">
-          <div className="logo">
-            <img src="/favicon.png" alt="Logo" className="logo-img" />
-          </div>
-          <nav className="nav-links">
-            <a href="#home">Home</a>
-            <a href="#tecnologias">Tecnologias</a>
-            <a href="#projetos">Projetos ({projectCount})</a>
-            <a href="#contato">Contato</a>
-          </nav>
-          <div className="social-icons">
-            <a href="https://github.com/Pedroxbr16" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faGithub} className="github" />
-            </a>
-            <a href="https://www.linkedin.com/in/pedro-justo-463520298/" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faLinkedin} className="linkedin" />
-            </a>
-            <a href="https://www.instagram.com/pedrojusto_/" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faInstagram} className="instagram" />
-            </a>
-          </div>
-        </div>
-      </header>
-
+      <Navbar projectCount={projectCount} showLinks={true} />
+      {/* HOME */}
       <section id="home" className="intro">
         <div className="intro-content">
           <div className="intro-text">
             <h1>Pedro Justo</h1>
             <p className="subtitle">Desenvolvedor FullStack</p>
+
             <p className="description">
               Sou desenvolvedor fullstack com especialização em aplicações web,
               atuando com foco em tecnologias como React e Node.js. Tenho
@@ -103,6 +82,7 @@ export default function Portfolio() {
               intuitivas, construção de APIs escaláveis e integração de sistemas
               modernos.
             </p>
+
             <p className="description">
               Tenho como propósito transformar ideias em soluções tecnológicas
               eficientes, contribuindo diretamente para a otimização de
@@ -112,12 +92,15 @@ export default function Portfolio() {
               excelência.
             </p>
           </div>
+
           <img src="/user.png" alt="Pedro Justo" className="profile-img" />
         </div>
       </section>
 
+      {/* TECNOLOGIAS */}
       <section id="tecnologias" className="tech-section">
         <h1 className="tech-title">Tecnologias que mais utilizo</h1>
+
         <div className="tech-icons-container">
           {techIcons.map((tech, index) => (
             <div key={index} className="tech-icon">
@@ -132,20 +115,26 @@ export default function Portfolio() {
         </div>
       </section>
 
+      {/* PROJETOS */}
       <section id="projetos" className="projects">
-        <h2>Meus Projetos</h2>
+        <h2>Meus Projetos ({projectCount})</h2>
         <p>Um pouco de alguns projetos pessoais e trabalhos que participei</p>
 
         <div className="projects-grid">
           {projects.map((project, idx) => (
             <div className="project-card" key={idx}>
               <div className="card-image-placeholder">
-                <img src={project.image} alt={project.title} className="project-image" />
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="project-image"
+                />
               </div>
 
               <div className="card-info">
                 <h3 className="card-title">{project.title}</h3>
                 <p className="card-description">{project.description}</p>
+
                 <div className="card-tags">
                   {project.tags.map((tag) => (
                     <span key={tag} className="card-tag">{tag}</span>
@@ -155,20 +144,44 @@ export default function Portfolio() {
 
               <div className="card-buttons">
                 {project.code !== '#' ? (
-                  <a href={project.code} target="_blank" rel="noopener noreferrer" className="btn-outline">
+                  <a
+                    href={project.code}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-outline"
+                  >
                     <FontAwesomeIcon icon={faGithub} className="icon-left" />
                     Código
                   </a>
                 ) : (
-                  <button className="btn-outline" onClick={() => showWarningAlert('Link de código ainda não disponível.')}>Código</button>
+                  <button
+                    className="btn-outline"
+                    onClick={() =>
+                      showWarningAlert('Link de código ainda não disponível.')
+                    }
+                  >
+                    Código
+                  </button>
                 )}
 
                 {project.demo !== '#' ? (
-                  <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-black">
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-black"
+                  >
                     Ver Projeto
                   </a>
                 ) : (
-                  <button className="btn-black" onClick={() => showWarningAlert('Link de demonstração ainda não disponível.')}>Ver Projeto</button>
+                  <button
+                    className="btn-black"
+                    onClick={() =>
+                      showWarningAlert('Link de demonstração ainda não disponível.')
+                    }
+                  >
+                    Ver Projeto
+                  </button>
                 )}
               </div>
             </div>
@@ -176,26 +189,46 @@ export default function Portfolio() {
         </div>
       </section>
 
-      <ContatoForm />
+      {/* CONTATO */}
+      <section id="contato">
+        <ContatoForm />
+      </section>
 
+      {/* FOOTER */}
       <footer className="footer">
         <div className="social-icons">
-          <a href="https://github.com/Pedroxbr16" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://github.com/Pedroxbr16"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FontAwesomeIcon icon={faGithub} className="github" />
           </a>
-          <a href="https://www.linkedin.com/in/pedro-justo-463520298/" target="_blank" rel="noopener noreferrer">
+
+          <a
+            href="https://www.linkedin.com/in/pedro-justo-463520298/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FontAwesomeIcon icon={faLinkedin} className="linkedin" />
           </a>
-          <a href="https://www.instagram.com/pedrojusto_/" target="_blank" rel="noopener noreferrer">
+
+          <a
+            href="https://www.instagram.com/pedrojusto_/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FontAwesomeIcon icon={faInstagram} className="instagram" />
           </a>
         </div>
       </footer>
 
+      {/* MENU FLUTUANTE (mobile) */}
       <div className="floating-nav">
         <button className="floating-button" onClick={toggleMenu}>
           <img src="/trace.svg" alt="Menu" className="menu-icon" />
         </button>
+
         {menuOpen && (
           <div className="floating-menu">
             <a href="#home" onClick={toggleMenu}>Home</a>
