@@ -38,7 +38,7 @@ const projects = [
     title: 'Documentação',
     description: 'Documentação criada com Docusaurus para organizar conteúdos técnicos.',
     code: 'https://github.com/Pedroxbr16/documentacao-geral',
-    demo: 'https://pemtech.vercel.app',
+    demo: 'https://documentacao-geral.vercel.app',
     image: '/documentacao.png',
     tags: ['Docusaurus', 'Markdown']
   },
