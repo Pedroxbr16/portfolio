@@ -18,7 +18,7 @@ function Hub() {
           </Link>
 
           <a
-            href="https://documentacao-geral.vercel.app/"
+            href="https://documentacao-geral.vercel.app"
             className="hub-button"
             target="_blank"
             rel="noopener noreferrer"
@@ -32,3 +32,4 @@ function Hub() {
 }
 
 export default Hub;
+
