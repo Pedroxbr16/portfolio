@@ -21,7 +21,9 @@ export default function Navbar({
       <div className="nav-container">
         {/* ESQUERDA: logo */}
         <div className="nav-left">
+          <a href="/">  
           <img src="/favicon.png" alt="Logo" className="logo-img" />
+          </a>
         </div>
 
         {/* CENTRO: links ou placeholder */}
