@@ -1,0 +1,313 @@
+.ferramentas-page {
+  min-height: 100vh;
+  background-color: #0f1117;
+  color: #fff;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+.container{
+  padding: 0 16px 60px;
+}
+
+/* título */
+.f-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0;
+  color: #fff;
+
+  /* esse margin-top grande dá espaço abaixo da navbar no desktop */
+  margin-top: 100px;
+}
+
+.f-subtitle {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  color: #94a3b8;
+  margin: 8px 0 32px;
+  line-height: 1.4;
+}
+
+/* grid de cards */
+.f-grid {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  gap: 24px;
+
+  /* mobile-first: 1 coluna */
+  grid-template-columns: 1fr;
+}
+
+/* >=600px: 2 colunas */
+@media (min-width: 600px) {
+  .f-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* >=1000px: 3 colunas */
+@media (min-width: 1000px) {
+  .f-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* card */
+.f-card {
+  background-color: #1a1d29;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+  padding: 20px 20px 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.f-card-title {
+  margin: 0;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+.f-card-desc {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* labels e inputs */
+.f-label {
+  color: #fff;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+
+.f-label-inline {
+  color: #fff;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.f-input-file,
+.f-select,
+.f-input-text {
+  background-color: #0f172a;
+  color: #fff;
+  font-size: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  border-radius: 8px;
+  padding: 10px 12px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.f-input-file::-webkit-file-upload-button {
+  background: #4dd3f5;
+  border: 0;
+  color: #000;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.f-select {
+  cursor: pointer;
+}
+
+.f-input-text {
+  background-color: #0f172a;
+}
+
+/* botão principal */
+.f-btn {
+  background-color: #4dd3f5;
+  color: #000;
+  font-weight: 600;
+  font-size: 14px;
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 10px 30px rgba(77,211,245,0.25);
+}
+.f-btn:hover {
+  background-color: #3ac2e6;
+  box-shadow: 0 16px 40px rgba(77,211,245,0.4);
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* info / resultado */
+.f-info {
+  background-color: #0f172a;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #fff;
+  word-break: break-word;
+}
+
+.f-info strong {
+  color: #4dd3f5;
+  font-weight: 600;
+}
+
+/* preview e download */
+.f-preview-block,
+.f-download-block {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+
+.f-preview-label {
+  color: #94a3b8;
+  font-size: 13px;
+  margin: 0;
+}
+.f-preview-img {
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(148,163,184,0.2);
+  background-color: #000;
+}
+
+/* link de download / link curto */
+.f-download-link,
+.f-link {
+  color: #4dd3f5;
+  text-decoration: none;
+  font-size: 14px;
+  word-break: break-all;
+}
+.f-download-link:hover,
+.f-link:hover {
+  text-decoration: underline;
+}
+.f-link-short {
+  font-weight: 600;
+  color: #20e3f0;
+}
+
+/* range qualidade */
+input[type="range"] {
+  accent-color: #4dd3f5;
+  cursor: pointer;
+}
+
+.f-hint {
+  background-color: #0f172a;
+  border: 1px dashed rgba(148,163,184,0.3);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.f-hint-text {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #94a3b8;
+}
+
+/* ====================================================== */
+/* ==================  RESPONSIVIDADE  ================== */
+/* ====================================================== */
+
+/* telas menores que 768px */
+@media (max-width: 768px) {
+
+
+  .f-title {
+    font-size: 22px;
+    line-height: 1.2;
+    margin-top: 24px; /* em vez de 100px */
+  }
+
+  .f-subtitle {
+    font-size: 13px;
+    line-height: 1.4;
+    margin: 6px 0 24px;
+    text-align: center;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .f-card {
+    border-radius: 12px;
+    padding: 16px 16px 20px;
+    row-gap: 14px;
+  }
+
+  .f-card-title {
+    font-size: 16px;
+    line-height: 1.3;
+  }
+
+  .f-card-desc {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .f-label,
+  .f-label-inline {
+    font-size: 13px;
+  }
+
+  .f-input-file,
+  .f-select,
+  .f-input-text {
+    font-size: 13px;
+    padding: 9px 10px;
+  }
+
+  .f-btn {
+    font-size: 13px;
+    padding: 11px 14px;
+    border-radius: 8px;
+  }
+
+  .f-info {
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+
+  .f-preview-label {
+    font-size: 12px;
+  }
+
+  .f-download-link,
+  .f-link {
+    font-size: 13px;
+    word-break: break-word;
+  }
+}
+
+/* telas MUITO pequenas (tipo <=380px), só um ajuste extra */
+@media (max-width: 380px) {
+  .f-title {
+    font-size: 20px;
+  }
+
+  .f-btn {
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+}

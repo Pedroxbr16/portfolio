@@ -2,10 +2,9 @@
   background-color: #1f1f1f;
   min-height: 100vh;
   color: #fff;
-  font-family: 'Orbitron', system-ui, sans-serif;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;       /* <- garante nada vaza pros lados */
+  overflow-x: hidden;     
 }
 
 /* área central */
