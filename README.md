@@ -16,17 +16,10 @@ Bem-vindo ao meu portfólio online! Aqui você encontra uma seleção dos meus p
 - **React**  
 - **Node.js**  
 - **PHP**  
-- **Java**  
 - **Python**  
 - **Docker**  
-
-## 🖥️ Projetos em Destaque
-
-| Projeto             | Descrição breve                                                                                           | Link                                           |
-|---------------------|-----------------------------------------------------------------------------------------------------------|------------------------------------------------|
-| Gestão de Clínica   | Sistema de gestão clínica com agenda médica, cadastro de pacientes e módulo financeiro integrado.         | https://github.com/Pedroxbr16/clinica-node     |
-| Sistema Patrimonial | Sistema de controle de bens com cadastro, edição e geração de termos de responsabilidade para empréstimos. | https://github.com/Pedroxbr16/patrimonio-react |
-| Documentação        | Documentação criada com Docusaurus para organizar conteúdos técnicos.                                     | https://github.com/Pedroxbr16/documentacao-geral |
+- **SQL**
+- **MONGODB**
 
 ## 📞 Contato
 
