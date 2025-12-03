@@ -30,6 +30,26 @@ async function loadFFmpeg() {
   return { ffmpeg: ffmpegInstance, fetchFile: fetchFileRef };
 }
 
+// Loader preguiçoso do Whisper (Transformers.js)
+let asrPipeline = null;
+
+async function loadWhisper() {
+  if (!asrPipeline) {
+    try {
+      const { pipeline } = await import("@xenova/transformers");
+      asrPipeline = await pipeline(
+        "automatic-speech-recognition",
+        "Xenova/whisper-tiny" // pode trocar por whisper-tiny.en se quiser
+      );
+    } catch (err) {
+      console.warn("Falha ao carregar modelo Whisper:", err);
+      // erro específico pra tratar no handler
+      throw new Error("WHISPER_LOAD_FAILED");
+    }
+  }
+  return asrPipeline;
+}
+
 export default function Ferramentas() {
   // ========== ESTADOS GERAIS ==========
 
@@ -61,6 +81,11 @@ export default function Ferramentas() {
   // CONVERSOR DE ARQUIVOS (IMAGENS -> PDF)
   const [pdfImages, setPdfImages] = useState([]); // File[]
   const [pdfDownloadURL, setPdfDownloadURL] = useState("");
+
+  // TRANSCRIÇÃO DE ÁUDIO
+  const [audioInputFile, setAudioInputFile] = useState(null);
+  const [audioTranscript, setAudioTranscript] = useState("");
+  const [audioStatus, setAudioStatus] = useState("");
 
   // ========== FUNÇÕES: COMPRESSOR ==========
 
@@ -349,6 +374,62 @@ export default function Ferramentas() {
     return { drawW, drawH, offsetX, offsetY };
   }
 
+  // ========== FUNÇÕES: TRANSCRIÇÃO DE ÁUDIO ==========
+
+  function handleAudioFileChange(e) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setAudioInputFile(file);
+    setAudioTranscript("");
+    setAudioStatus(`Arquivo selecionado: ${file.name}`);
+  }
+
+  async function handleTranscribeAudio() {
+    if (!audioInputFile) {
+      alert("Escolha um arquivo de áudio primeiro.");
+      return;
+    }
+
+    try {
+      setAudioStatus(
+        "Carregando modelo de transcrição (pode demorar um pouco na primeira vez)..."
+      );
+
+      let transcriber;
+      try {
+        transcriber = await loadWhisper();
+      } catch (e) {
+        if (e.message === "WHISPER_LOAD_FAILED") {
+          setAudioStatus(
+            "Não consegui baixar o modelo de transcrição. " +
+              "Provavelmente a rede está bloqueando o acesso ao Hugging Face."
+          );
+          alert(
+            "Recurso de transcrição indisponível nesse ambiente (falha ao baixar o modelo)."
+          );
+          return;
+        }
+        throw e;
+      }
+
+      setAudioStatus("Transcrevendo áudio...");
+
+      const url = URL.createObjectURL(audioInputFile);
+
+      const result = await transcriber(url, {
+        task: "transcribe",
+        // language: "pt", // se quiser forçar português
+      });
+
+      setAudioTranscript(result.text || "");
+      setAudioStatus("Transcrição concluída!");
+    } catch (err) {
+      console.error(err);
+      setAudioStatus("Erro na transcrição.");
+      alert("Falha ao transcrever áudio. Veja o console para detalhes.");
+    }
+  }
+
   // ========== RENDER ==========
 
   return (
@@ -565,6 +646,47 @@ export default function Ferramentas() {
                 >
                   Baixar convertido
                 </a>
+              </div>
+            )}
+          </section>
+
+          {/* ================= TRANSCRIÇÃO DE ÁUDIO ================= */}
+          <section className="f-card">
+            <h2 className="f-card-title">Transcrever Áudio (beta)</h2>
+            <p className="f-card-desc">
+              Envie um arquivo de áudio (MP3, WAV, etc.) e gere o texto usando
+              Whisper rodando direto no navegador.
+            </p>
+
+            <label className="f-label">
+              Escolher arquivo de áudio:
+              <input
+                type="file"
+                accept="audio/*"
+                onChange={handleAudioFileChange}
+                className="f-input-file"
+              />
+            </label>
+
+            <button className="f-btn" onClick={handleTranscribeAudio}>
+              Transcrever áudio
+            </button>
+
+            {audioStatus && (
+              <p className="f-preview-label" style={{ marginTop: "8px" }}>
+                {audioStatus}
+              </p>
+            )}
+
+            {audioTranscript && (
+              <div className="f-preview-block">
+                <p className="f-preview-label">Transcrição</p>
+                <textarea
+                  className="f-input-text"
+                  style={{ minHeight: "150px", width: "100%" }}
+                  value={audioTranscript}
+                  onChange={(e) => setAudioTranscript(e.target.value)}
+                />
               </div>
             )}
           </section>
