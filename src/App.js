@@ -57,6 +57,14 @@ const projects = [
     demo: 'https://baixador.streamlit.app',
     image: '/baixador.png',
     tags: ['Python', 'Streamlit', 'Pytube']
+  },
+  {
+    title: 'Montador de Escalas',
+    description: 'Sistema web self-service para montar escalas de forma rápida e inteligente,facilitando a gestão da equipe.',
+    code:'https://github.com/Pedroxbr16/MakeSchedule',
+    demo: 'https://make-schedule-nine.vercel.app',
+    image: '/montaEscala.png',
+    tags: ['Next.js', 'CSS']
   }
 ];
 
