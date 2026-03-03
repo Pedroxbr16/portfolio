@@ -192,9 +192,7 @@ export default function Portfolio() {
       </section>
 
       {/* CONTATO */}
-      <section id="contato">
-        <ContatoForm />
-      </section>
+      <ContatoForm />
 
       {/* FOOTER */}
       <footer className="footer">
