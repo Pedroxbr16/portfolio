@@ -155,6 +155,16 @@ export default function Ferramentas() {
     setPdfDownloadURL("");
   }
 
+  function handleRemovePdfImage(indexToRemove) {
+    setPdfImages((prev) => prev.filter((_, index) => index !== indexToRemove));
+    setPdfDownloadURL("");
+  }
+
+  function handleClearPdfImages() {
+    setPdfImages([]);
+    setPdfDownloadURL("");
+  }
+
   async function gerarPDF() {
     if (pdfImages.length === 0) return;
 
@@ -463,11 +473,35 @@ export default function Ferramentas() {
             </button>
 
             {pdfImages.length > 0 && (
-              <div className="f-info">
-                <div>
-                  <strong>Imagens selecionadas:</strong>{" "}
-                  {pdfImages.map((f) => f.name).join(", ")}
+              <div className="f-pdf-selected">
+                <div className="f-pdf-selected-header">
+                  <strong>Imagens selecionadas ({pdfImages.length})</strong>
+                  <button
+                    type="button"
+                    className="f-pdf-clear-btn"
+                    onClick={handleClearPdfImages}
+                  >
+                    Limpar tudo
+                  </button>
                 </div>
+
+                <ul className="f-pdf-list">
+                  {pdfImages.map((file, index) => (
+                    <li
+                      className="f-pdf-item"
+                      key={`${file.name}-${file.size}-${index}`}
+                    >
+                      <span className="f-pdf-item-name">{file.name}</span>
+                      <button
+                        type="button"
+                        className="f-pdf-remove-btn"
+                        onClick={() => handleRemovePdfImage(index)}
+                      >
+                        Remover
+                      </button>
+                    </li>
+                  ))}
+                </ul>
               </div>
             )}
 

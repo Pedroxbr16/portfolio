@@ -40,10 +40,10 @@ export default function Navbar({
         ) : (
           // placeholder some via CSS (.nav-links--placeholder { display: none; })
           <nav className="nav-links nav-links--placeholder" aria-hidden="true">
-            <a>_</a>
-            <a>_</a>
-            <a>_</a>
-            <a>_</a>
+            <span>_</span>
+            <span>_</span>
+            <span>_</span>
+            <span>_</span>
           </nav>
         )}
 
