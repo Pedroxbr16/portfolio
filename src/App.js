@@ -54,7 +54,7 @@ const projects = [
     title: 'Baixador de Vídeos',
     description: 'Ferramenta em Python com Streamlit para baixar vídeos do YouTube de forma prática.',
     code: 'https://github.com/Pedroxbr16/baixador_videos',
-    demo: 'https://baixador-videos.vercel.app',
+    demo: 'https://baixador.streamlit.app',
     image: '/baixador.png',
     tags: ['Python', 'Streamlit', 'Pytube']
   }
@@ -81,20 +81,17 @@ export default function Portfolio() {
             <p className="subtitle">Desenvolvedor FullStack</p>
 
             <p className="description">
-              Sou desenvolvedor fullstack com especialização em aplicações web,
-              atuando com foco em tecnologias como React e Node.js. Tenho
-              experiência no desenvolvimento de interfaces funcionais e
-              intuitivas, construção de APIs escaláveis e integração de sistemas
-              modernos.
+              Desenvolvo aplicações web com foco em Node.js e EJS, criando
+              sistemas server-side com interfaces dinâmicas, rotas bem
+              estruturadas e integração com banco de dados.
             </p>
 
             <p className="description">
-              Tenho como propósito transformar ideias em soluções tecnológicas
-              eficientes, contribuindo diretamente para a otimização de
-              processos e a melhoria da experiência do usuário. Estou em
-              constante atualização, buscando novas ferramentas e conhecimentos
-              que me permitam evoluir continuamente e entregar resultados de
-              excelência.
+              Meu objetivo é entregar soluções simples, performáticas e
+              escaláveis, com código organizado e foco em resolver problemas
+              reais de negócio. Também tenho experiência com React e APIs
+              REST, complementando o desenvolvimento fullstack quando
+              necessário.
             </p>
           </div>
 

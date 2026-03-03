@@ -204,6 +204,41 @@
   color: #20e3f0;
 }
 
+/* saída específica do encurtador */
+.f-shortener-output {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.f-shortener-success {
+  margin: 0;
+  background: linear-gradient(90deg, #14532d 0%, #14532d 100%);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  color: #dcfce7;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.f-shortener-link {
+  display: block;
+  background-color: #0f172a;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 10px;
+  padding: 14px;
+  color: #e2e8f0;
+  text-decoration: none;
+  font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+  font-size: 15px;
+  word-break: break-all;
+}
+
+.f-shortener-link:hover {
+  border-color: rgba(77, 211, 245, 0.5);
+}
+
 /* range qualidade */
 input[type="range"] {
   accent-color: #4dd3f5;
@@ -295,6 +330,16 @@ input[type="range"] {
   .f-link {
     font-size: 13px;
     word-break: break-word;
+  }
+
+  .f-shortener-success {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+
+  .f-shortener-link {
+    font-size: 13px;
+    padding: 12px;
   }
 }
 

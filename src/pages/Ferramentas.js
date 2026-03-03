@@ -13,43 +13,6 @@ function gerarSlugCurto() {
   return out;
 }
 
-// Loader preguiçoso do ffmpeg.wasm (API nova: FFmpeg + @ffmpeg/util)
-let ffmpegInstance = null;
-let fetchFileRef = null;
-
-async function loadFFmpeg() {
-  if (!ffmpegInstance) {
-    const { FFmpeg } = await import("@ffmpeg/ffmpeg");
-    const { fetchFile } = await import("@ffmpeg/util");
-
-    ffmpegInstance = new FFmpeg();
-    fetchFileRef = fetchFile;
-
-    await ffmpegInstance.load();
-  }
-  return { ffmpeg: ffmpegInstance, fetchFile: fetchFileRef };
-}
-
-// Loader preguiçoso do Whisper (Transformers.js)
-let asrPipeline = null;
-
-async function loadWhisper() {
-  if (!asrPipeline) {
-    try {
-      const { pipeline } = await import("@xenova/transformers");
-      asrPipeline = await pipeline(
-        "automatic-speech-recognition",
-        "Xenova/whisper-tiny" // pode trocar por whisper-tiny.en se quiser
-      );
-    } catch (err) {
-      console.warn("Falha ao carregar modelo Whisper:", err);
-      // erro específico pra tratar no handler
-      throw new Error("WHISPER_LOAD_FAILED");
-    }
-  }
-  return asrPipeline;
-}
-
 export default function Ferramentas() {
   // ========== ESTADOS GERAIS ==========
 
@@ -70,22 +33,11 @@ export default function Ferramentas() {
 
   // ENCURTADOR
   const [urlOriginal, setUrlOriginal] = useState("");
-  const [urlEncurtada, setUrlEncurtada] = useState("");
-
-  // CONVERSOR DE VÍDEO / ÁUDIO
-  const [mediaInputFile, setMediaInputFile] = useState(null);
-  const [mediaTarget, setMediaTarget] = useState("mp3"); // formato de saída
-  const [mediaDownloadURL, setMediaDownloadURL] = useState("");
-  const [mediaStatus, setMediaStatus] = useState("");
+  const [urlEncurtada, setUrlEncurtada] = useState(null);
 
   // CONVERSOR DE ARQUIVOS (IMAGENS -> PDF)
   const [pdfImages, setPdfImages] = useState([]); // File[]
   const [pdfDownloadURL, setPdfDownloadURL] = useState("");
-
-  // TRANSCRIÇÃO DE ÁUDIO
-  const [audioInputFile, setAudioInputFile] = useState(null);
-  const [audioTranscript, setAudioTranscript] = useState("");
-  const [audioStatus, setAudioStatus] = useState("");
 
   // ========== FUNÇÕES: COMPRESSOR ==========
 
@@ -183,105 +135,14 @@ export default function Ferramentas() {
       new URL(finalUrl); // valida
 
       const slug = gerarSlugCurto();
-      const curtinha = window.location.origin + "/r/" + slug;
+      const curtinha = `https://is.gd/${slug}`;
 
       setUrlEncurtada({
         curta: curtinha,
         original: finalUrl,
-        slug,
       });
     } catch (err) {
       alert("URL inválida.");
-    }
-  }
-
-  // ========== FUNÇÕES: CONVERSOR VÍDEO / ÁUDIO (FFmpeg API NOVA) ==========
-
-  function handleMediaFileChange(e) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setMediaInputFile(file);
-    setMediaDownloadURL("");
-    setMediaStatus(`Arquivo selecionado: ${file.name}`);
-  }
-
-  function getMimeFromTarget(ext) {
-    switch (ext) {
-      case "mp3":
-        return "audio/mpeg";
-      case "mp4":
-        return "video/mp4";
-      case "webm":
-        return "video/webm";
-      case "mkv":
-        return "video/x-matroska";
-      default:
-        return "application/octet-stream";
-    }
-  }
-
-  async function handleMediaConvert() {
-    if (!mediaInputFile) {
-      alert("Escolha um arquivo de vídeo ou áudio primeiro.");
-      return;
-    }
-
-    try {
-      setMediaStatus("Carregando ffmpeg (pode demorar alguns segundos)...");
-      const { ffmpeg, fetchFile } = await loadFFmpeg();
-
-      setMediaStatus("Convertendo arquivo... (não feche a aba)");
-
-      const inputExt =
-        mediaInputFile.name.split(".").pop()?.toLowerCase() || "mp4";
-      const inputName = `input.${inputExt}`;
-      const outputName = `output.${mediaTarget}`;
-
-      // escreve o arquivo no FS virtual
-      await ffmpeg.writeFile(inputName, await fetchFile(mediaInputFile));
-
-      if (mediaTarget === "mp3") {
-        // extrai só o áudio
-        await ffmpeg.exec([
-          "-i",
-          inputName,
-          "-vn",
-          "-acodec",
-          "libmp3lame",
-          "-q:a",
-          "2",
-          outputName,
-        ]);
-      } else {
-        // vídeo -> outro vídeo
-        await ffmpeg.exec([
-          "-i",
-          inputName,
-          "-c:v",
-          "libx264",
-          "-c:a",
-          "aac",
-          outputName,
-        ]);
-      }
-
-      const data = await ffmpeg.readFile(outputName);
-      const blob = new Blob([data.buffer], {
-        type: getMimeFromTarget(mediaTarget),
-      });
-      const url = URL.createObjectURL(blob);
-      setMediaDownloadURL(url);
-      setMediaStatus("Conversão concluída!");
-
-      // limpa FS virtual
-      try {
-        await ffmpeg.deleteFile(inputName);
-        await ffmpeg.deleteFile(outputName);
-      } catch (_) {}
-    } catch (err) {
-      console.error(err);
-      setMediaStatus("Erro na conversão. Veja o console para detalhes.");
-      alert("Falha ao converter arquivo. Tente outro formato ou arquivo.");
     }
   }
 
@@ -372,62 +233,6 @@ export default function Ferramentas() {
     const offsetX = (maxW - drawW) / 2;
     const offsetY = (maxH - drawH) / 2;
     return { drawW, drawH, offsetX, offsetY };
-  }
-
-  // ========== FUNÇÕES: TRANSCRIÇÃO DE ÁUDIO ==========
-
-  function handleAudioFileChange(e) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setAudioInputFile(file);
-    setAudioTranscript("");
-    setAudioStatus(`Arquivo selecionado: ${file.name}`);
-  }
-
-  async function handleTranscribeAudio() {
-    if (!audioInputFile) {
-      alert("Escolha um arquivo de áudio primeiro.");
-      return;
-    }
-
-    try {
-      setAudioStatus(
-        "Carregando modelo de transcrição (pode demorar um pouco na primeira vez)..."
-      );
-
-      let transcriber;
-      try {
-        transcriber = await loadWhisper();
-      } catch (e) {
-        if (e.message === "WHISPER_LOAD_FAILED") {
-          setAudioStatus(
-            "Não consegui baixar o modelo de transcrição. " +
-              "Provavelmente a rede está bloqueando o acesso ao Hugging Face."
-          );
-          alert(
-            "Recurso de transcrição indisponível nesse ambiente (falha ao baixar o modelo)."
-          );
-          return;
-        }
-        throw e;
-      }
-
-      setAudioStatus("Transcrevendo áudio...");
-
-      const url = URL.createObjectURL(audioInputFile);
-
-      const result = await transcriber(url, {
-        task: "transcribe",
-        // language: "pt", // se quiser forçar português
-      });
-
-      setAudioTranscript(result.text || "");
-      setAudioStatus("Transcrição concluída!");
-    } catch (err) {
-      console.error(err);
-      setAudioStatus("Erro na transcrição.");
-      alert("Falha ao transcrever áudio. Veja o console para detalhes.");
-    }
   }
 
   // ========== RENDER ==========
@@ -593,110 +398,12 @@ export default function Ferramentas() {
             ></canvas>
           </section>
 
-          {/* ================= CONVERSOR DE VÍDEO / ÁUDIO ================= */}
-          <section className="f-card">
-            <h2 className="f-card-title">Conversor de Vídeo & Áudio (beta)</h2>
-            <p className="f-card-desc">
-              Converta um vídeo do seu computador para outros formatos
-              (MP3, MP4, MKV, WEBM). Tudo no navegador — pode demorar um pouco
-              em arquivos grandes.
-            </p>
-
-            <label className="f-label">
-              Escolher arquivo de vídeo/áudio:
-              <input
-                type="file"
-                accept="video/*,audio/*"
-                onChange={handleMediaFileChange}
-                className="f-input-file"
-              />
-            </label>
-
-            <label className="f-label">
-              Formato de saída:
-              <select
-                className="f-select"
-                value={mediaTarget}
-                onChange={(e) => setMediaTarget(e.target.value)}
-              >
-                <option value="mp3">MP3 (só áudio)</option>
-                <option value="mp4">MP4</option>
-                <option value="mkv">MKV</option>
-                <option value="webm">WEBM</option>
-              </select>
-            </label>
-
-            <button className="f-btn" onClick={handleMediaConvert}>
-              Converter vídeo/áudio
-            </button>
-
-            {mediaStatus && (
-              <p className="f-preview-label" style={{ marginTop: "8px" }}>
-                {mediaStatus}
-              </p>
-            )}
-
-            {mediaDownloadURL && (
-              <div className="f-download-block">
-                <p className="f-preview-label">Arquivo convertido</p>
-                <a
-                  className="f-download-link"
-                  href={mediaDownloadURL}
-                  download={`convertido.${mediaTarget}`}
-                >
-                  Baixar convertido
-                </a>
-              </div>
-            )}
-          </section>
-
-          {/* ================= TRANSCRIÇÃO DE ÁUDIO ================= */}
-          <section className="f-card">
-            <h2 className="f-card-title">Transcrever Áudio (beta)</h2>
-            <p className="f-card-desc">
-              Envie um arquivo de áudio (MP3, WAV, etc.) e gere o texto usando
-              Whisper rodando direto no navegador.
-            </p>
-
-            <label className="f-label">
-              Escolher arquivo de áudio:
-              <input
-                type="file"
-                accept="audio/*"
-                onChange={handleAudioFileChange}
-                className="f-input-file"
-              />
-            </label>
-
-            <button className="f-btn" onClick={handleTranscribeAudio}>
-              Transcrever áudio
-            </button>
-
-            {audioStatus && (
-              <p className="f-preview-label" style={{ marginTop: "8px" }}>
-                {audioStatus}
-              </p>
-            )}
-
-            {audioTranscript && (
-              <div className="f-preview-block">
-                <p className="f-preview-label">Transcrição</p>
-                <textarea
-                  className="f-input-text"
-                  style={{ minHeight: "150px", width: "100%" }}
-                  value={audioTranscript}
-                  onChange={(e) => setAudioTranscript(e.target.value)}
-                />
-              </div>
-            )}
-          </section>
-
           {/* ================= ENCURTADOR ================= */}
           <section className="f-card">
             <h2 className="f-card-title">Encurtador de Link</h2>
             <p className="f-card-desc">
-              Gera um link curto fake localmente (sem backend). Só pra
-              compartilhar.
+              Gera um link curto simulado no formato is.gd, localmente (sem
+              backend).
             </p>
 
             <label className="f-label">
@@ -706,7 +413,10 @@ export default function Ferramentas() {
                 type="text"
                 placeholder="https://exemplo.com/alguma/coisa"
                 value={urlOriginal}
-                onChange={(e) => setUrlOriginal(e.target.value)}
+                onChange={(e) => {
+                  setUrlOriginal(e.target.value);
+                  setUrlEncurtada(null);
+                }}
               />
             </label>
 
@@ -715,29 +425,16 @@ export default function Ferramentas() {
             </button>
 
             {urlEncurtada && (
-              <div className="f-info">
-                <div>
-                  <strong>Original:</strong>{" "}
-                  <a
-                    className="f-link"
-                    href={urlEncurtada.original}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {urlEncurtada.original}
-                  </a>
-                </div>
-                <div>
-                  <strong>Curta:</strong>{" "}
-                  <a
-                    className="f-link f-link-short"
-                    href={urlEncurtada.original}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {urlEncurtada.curta}
-                  </a>
-                </div>
+              <div className="f-shortener-output">
+                <p className="f-shortener-success">✅ Link encurtado com sucesso!</p>
+                <a
+                  className="f-shortener-link"
+                  href={urlEncurtada.original}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {urlEncurtada.curta}
+                </a>
               </div>
             )}
           </section>
