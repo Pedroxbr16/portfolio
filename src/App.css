@@ -278,6 +278,10 @@ body {
 .contact-form button:hover {
   background: #2875d9;
 }
+.contact-form button:disabled {
+  background: #4b5668;
+  cursor: not-allowed;
+}
 .contact h2 {
   text-align: center;
 }
