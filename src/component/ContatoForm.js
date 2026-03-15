@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import emailjs from 'emailjs-com';
 import '../App.css';
 import {
   showSuccessAlert,
@@ -94,6 +93,9 @@ export default function ContactForm() {
 
     setIsSending(true);
     try {
+      const emailjsModule = await import('emailjs-com');
+      const emailjs = emailjsModule.default;
+
       await emailjs.sendForm(serviceID, templateID, form.current, publicKey);
       showSuccessAlert('Mensagem enviada com sucesso! Aguarde retorno.');
       form.current.reset();

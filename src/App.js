@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Suspense, lazy, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHtml5, faCss3Alt, faJs, faReact,
@@ -8,8 +8,10 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import './App.css';
 import Navbar from './component/Navbar';
-import ContatoForm from './component/ContatoForm';
+import LazySection from './component/LazySection';
 import { showWarningAlert } from './component/SweetAlert';
+
+const ContatoForm = lazy(() => import('./component/ContatoForm'));
 
 const techIcons = [
   { icon: faHtml5, label: 'HTML5' },
@@ -30,7 +32,7 @@ const projects = [
     title: 'Gestão de Clínica',
     description: 'Sistema de gestão clínica com agenda médica, cadastro de pacientes e módulo financeiro integrado.',
     code: 'https://github.com/Pedroxbr16/clinica-node',
-    demo: 'https://clinica-node.vercel.app/login',
+    demo: 'https:/clinica.pedrojusto.com.br',
     image: '/clinica.png',
     tags: ['React', 'CSS', 'Bootstrap', 'Node.js', 'MySQL']
   },
@@ -38,7 +40,7 @@ const projects = [
     title: 'Documentação',
     description: 'Documentação criada com Docusaurus para organizar conteúdos técnicos.',
     code: 'https://github.com/Pedroxbr16/documentacao-geral',
-    demo: 'https://documentacao-geral.vercel.app',
+    demo: 'https://documentacao.pedrojusto.com.br',
     image: '/documentacao.png',
     tags: ['Docusaurus', 'Markdown']
   },
@@ -62,7 +64,7 @@ const projects = [
     title: 'Montador de Escalas',
     description: 'Sistema web self-service para montar escalas de forma rápida e inteligente,facilitando a gestão da equipe.',
     code:'https://github.com/Pedroxbr16/MakeSchedule',
-    demo: 'https://make-schedule-nine.vercel.app',
+    demo: 'https://escala.pedrojusto.com.br',
     image: '/montaEscala.png',
     tags: ['Next.js', 'CSS']
   }
@@ -75,11 +77,7 @@ export default function Portfolio() {
 
   return (
     <div className="container">
-      <Navbar
-        showLinks={true}
-        projectCount={projectCount}
-        variant="portfolio"
-      />
+      <Navbar projectCount={projectCount} />
 
       {/* HOME */}
       <section id="home" className="intro">
@@ -103,7 +101,14 @@ export default function Portfolio() {
             </p>
           </div>
 
-          <img src="/user.png" alt="Pedro Justo" className="profile-img" />
+          <img
+            src="/user.png"
+            alt="Pedro Justo"
+            className="profile-img"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+          />
         </div>
       </section>
 
@@ -115,7 +120,13 @@ export default function Portfolio() {
           {techIcons.map((tech, index) => (
             <div key={index} className="tech-icon">
               {tech.isImage ? (
-                <img src={tech.icon} alt={tech.label} className="tech-img" />
+                <img
+                  src={tech.icon}
+                  alt={tech.label}
+                  className="tech-img"
+                  loading="lazy"
+                  decoding="async"
+                />
               ) : (
                 <FontAwesomeIcon icon={tech.icon} size="3x" />
               )}
@@ -138,6 +149,8 @@ export default function Portfolio() {
                   src={project.image}
                   alt={project.title}
                   className="project-image"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
 
@@ -200,7 +213,26 @@ export default function Portfolio() {
       </section>
 
       {/* CONTATO */}
-      <ContatoForm />
+      <LazySection
+        className="contact-lazy-wrapper"
+        fallback={
+          <section id="contato" className="contact contact--loading">
+            <h2>Entre em contato</h2>
+            <p className="contact-loading-text">Carregando formulario...</p>
+          </section>
+        }
+      >
+        <Suspense
+          fallback={
+            <section id="contato" className="contact contact--loading">
+              <h2>Entre em contato</h2>
+              <p className="contact-loading-text">Carregando formulario...</p>
+            </section>
+          }
+        >
+          <ContatoForm />
+        </Suspense>
+      </LazySection>
 
       {/* FOOTER */}
       <footer className="footer">

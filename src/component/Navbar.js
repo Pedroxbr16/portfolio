@@ -7,45 +7,27 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import '../assets/css/Navbar.css';
 
-export default function Navbar({
-  projectCount,
-  showLinks = true,
-  variant, // 'portfolio' ou 'hub'
-}) {
+export default function Navbar({ projectCount }) {
   return (
-    <header
-      className={`navbar ${
-        variant === 'portfolio' ? 'navbar--portfolio' : 'navbar--hub'
-      }`}
-    >
+    <header className="navbar navbar--portfolio">
       <div className="nav-container">
         {/* ESQUERDA: logo */}
         <div className="nav-left">
-          <a href="/">  
-          <img src="/favicon.png" alt="Logo" className="logo-img" />
+          <a href="/">
+            <img src="/favicon.png" alt="Logo de Pedro Justo" className="logo-img" />
           </a>
         </div>
 
-        {/* CENTRO: links ou placeholder */}
-        {showLinks ? (
-          <nav className="nav-links">
-            <a href="#home">Home</a>
-            <a href="#tecnologias">Tecnologias</a>
-            <a href="#projetos">
-              Projetos{' '}
-              {typeof projectCount === 'number' ? `(${projectCount})` : ''}
-            </a>
-            <a href="#contato">Contato</a>
-          </nav>
-        ) : (
-          // placeholder some via CSS (.nav-links--placeholder { display: none; })
-          <nav className="nav-links nav-links--placeholder" aria-hidden="true">
-            <span>_</span>
-            <span>_</span>
-            <span>_</span>
-            <span>_</span>
-          </nav>
-        )}
+        {/* CENTRO: links */}
+        <nav className="nav-links">
+          <a href="#home">Home</a>
+          <a href="#tecnologias">Tecnologias</a>
+          <a href="#projetos">
+            Projetos{' '}
+            {typeof projectCount === 'number' ? `(${projectCount})` : ''}
+          </a>
+          <a href="#contato">Contato</a>
+        </nav>
 
         {/* DIREITA: redes sociais */}
         <div className="social-icons">
