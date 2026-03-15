@@ -32,7 +32,7 @@ const projects = [
     title: 'Gestão de Clínica',
     description: 'Sistema de gestão clínica com agenda médica, cadastro de pacientes e módulo financeiro integrado.',
     code: 'https://github.com/Pedroxbr16/clinica-node',
-    demo: 'https:/clinica.pedrojusto.com.br',
+    demo: 'https://clinica.pedrojusto.com.br',
     image: '/clinica.png',
     tags: ['React', 'CSS', 'Bootstrap', 'Node.js', 'MySQL']
   },
