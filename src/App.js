@@ -1,0 +1,378 @@
+import React, { Suspense, lazy, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faHtml5, faCss3Alt, faJs, faReact,
+  faNodeJs, faPhp, faPython,
+  faGithub, faLinkedin, faInstagram,
+  faDocker, faGitAlt
+} from '@fortawesome/free-brands-svg-icons';
+import { FiArrowRight, FiMail } from 'react-icons/fi';
+import './App.css';
+import Navbar from './component/Navbar';
+import LazySection from './component/LazySection';
+import { showWarningAlert } from './component/SweetAlert';
+import { smoothScrollTo } from './utils/scroll';
+
+const ContatoForm = lazy(() => import('./component/ContatoForm'));
+
+const techIcons = [
+  { icon: faHtml5, label: 'HTML5' },
+  { icon: faCss3Alt, label: 'CSS3' },
+  { icon: faJs, label: 'JavaScript' },
+  { icon: faReact, label: 'React' },
+  { icon: faNodeJs, label: 'Node.js' },
+  { icon: faPhp, label: 'PHP' },
+  { icon: faPython, label: 'Python' },
+  { icon: faDocker, label: 'Docker' },
+  { icon: faGitAlt, label: 'Git' },
+  { icon: '/ejs.svg', label: 'EJS', isImage: true },
+  { icon: '/sql.svg', label: 'SQL', isImage: true },
+  { icon: '/mongo.svg', label: 'MongoDB', isImage: true },
+];
+
+const projects = [
+  {
+    title: 'Gestão de Clínica',
+    description: 'Sistema de gestão clínica com agenda médica, cadastro de pacientes e módulo financeiro integrado.',
+    code: 'https://github.com/Pedroxbr16/clinica-node',
+    demo: 'https://clinica.pedrojusto.com.br',
+    image: '/clinica.png',
+    tags: ['React', 'CSS', 'Bootstrap', 'Node.js', 'MySQL']
+  },
+  {
+    title: 'Documentação',
+    description: 'Documentação criada com Docusaurus para organizar conteúdos técnicos.',
+    code: 'https://github.com/Pedroxbr16/documentacao-geral',
+    demo: 'https://documentacao.pedrojusto.com.br',
+    image: '/documentacao.png',
+    tags: ['Docusaurus', 'Markdown']
+  },
+  {
+    title: 'Encurtador de Links',
+    description: 'Aplicativo web para encurtar URLs de forma rápida e prática, com interface simples e intuitiva.',
+    code: 'https://github.com/Pedroxbr16/encurtador',
+    demo: 'https://encurtador.streamlit.app',
+    image: '/encurtador.png',
+    tags: ['Python', 'Streamlit']
+  },
+  {
+    title: 'Baixador de Vídeos',
+    description: 'Ferramenta em Python com Streamlit para baixar vídeos do YouTube de forma prática.',
+    code: 'https://github.com/Pedroxbr16/baixador_videos',
+    demo: 'https://baixador.streamlit.app',
+    image: '/baixador.png',
+    tags: ['Python', 'Streamlit', 'Pytube']
+  },
+  {
+    title: 'Montador de Escalas',
+    description: 'Sistema web self-service para montar escalas de forma rápida e inteligente, facilitando a gestão da equipe.',
+    code:'https://github.com/Pedroxbr16/MakeSchedule',
+    demo: 'https://escala.pedrojusto.com.br',
+    image: '/montaEscala.png',
+    tags: ['Next.js', 'CSS']
+  },
+  {
+    title: 'Monitor DOERJ',
+    description: 'Monitor do DOERJ com alertas por palavras-chave e seções, acervo local de edições em PDF por data e indexação no MongoDB para pesquisa rápida.',
+    code: '#',
+    demo: 'https://monitor.pedrojusto.com.br',
+    image: '/monitor-doerj.png',
+    tags: ['EJS', 'CSS', 'Node.js','MongoDB']
+  }
+];
+
+const tagCategoryMap = {
+  React: 'frontend',
+  CSS: 'frontend',
+  Bootstrap: 'frontend',
+  Docusaurus: 'docs',
+  Markdown: 'docs',
+  'Next.js': 'frontend',
+  'Node.js': 'backend',
+  EJS: 'backend',
+  Python: 'backend',
+  MySQL: 'database',
+  MongoDB: 'database',
+  Streamlit: 'tooling',
+  Pytube: 'tooling',
+};
+
+function getTagCategory(tag) {
+  return tagCategoryMap[tag] || 'default';
+}
+
+export default function Portfolio() {
+  const projectCount = projects.length;
+
+  useEffect(() => {
+    const reveals = document.querySelectorAll('.reveal');
+
+    const revealOnScroll = () => {
+      const windowHeight = window.innerHeight;
+      const elementVisible = 100;
+
+      reveals.forEach((reveal) => {
+        const elementTop = reveal.getBoundingClientRect().top;
+        if (elementTop < windowHeight - elementVisible) {
+          reveal.classList.add('active');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll(); // Trigger on load
+
+    return () => window.removeEventListener('scroll', revealOnScroll);
+  }, []);
+
+  return (
+    <div className="container">
+      <Navbar projectCount={projectCount} />
+
+      {/* HOME */}
+      <section id="home" className="intro">
+        <div className="intro-content">
+          <div className="intro-text reveal">
+            <h1>Pedro Justo</h1>
+            <p className="subtitle">Desenvolvedor FullStack</p>
+
+            <p className="description">
+              Desenvolvo aplicações web com foco em Node.js e EJS, criando sistemas server-side com interfaces dinâmicas, rotas bem estruturadas e integração com banco de dados.
+            </p>
+
+            <p className="description">
+              Meu objetivo é entregar soluções simples, performáticas e escaláveis, com código organizado e foco em resolver problemas reais de negócio. Tenho experiência com React e APIs REST.
+            </p>
+
+            <div className="hero-buttons">
+              <a href="#projetos" className="btn-primary" onClick={(e) => {
+                e.preventDefault();
+                smoothScrollTo('projetos');
+              }}>
+                Ver Projetos <FiArrowRight />
+              </a>
+              <a href="#contato" className="btn-outline" onClick={(e) => {
+                e.preventDefault();
+                smoothScrollTo('contato');
+              }}>
+                Fale Comigo <FiMail />
+              </a>
+            </div>
+          </div>
+
+          <div className="profile-img-container reveal">
+            {/* Ícones flutuantes */}
+            <div className="floating-icon icon-react">
+              <FontAwesomeIcon icon={faReact} />
+            </div>
+            <div className="floating-icon icon-node">
+              <FontAwesomeIcon icon={faNodeJs} />
+            </div>
+            <div className="floating-icon icon-php">
+              <FontAwesomeIcon icon={faPhp} />
+            </div>
+            <div className="floating-icon icon-js">
+              <FontAwesomeIcon icon={faJs} />
+            </div>
+            <div className="floating-icon icon-html">
+              <FontAwesomeIcon icon={faHtml5} />
+            </div>
+            <div className="floating-icon icon-python">
+              <FontAwesomeIcon icon={faPython} />
+            </div>
+
+            <img
+              src="/user.png"
+              alt="Pedro Justo"
+              className="profile-img"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* TECNOLOGIAS */}
+      <section id="tecnologias" className="tech-section reveal">
+        <h2 className="tech-title">Tecnologias que mais utilizo</h2>
+
+        <div className="marquee-wrapper">
+          <div className="marquee-track track-left">
+            {[...techIcons.slice(0, 6), ...techIcons.slice(0, 6), ...techIcons.slice(0, 6), ...techIcons.slice(0, 6)].map((tech, index) => (
+              <div key={index} className="tech-icon">
+                {tech.isImage ? (
+                  <img
+                    src={tech.icon}
+                    alt={tech.label}
+                    className="tech-img"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <FontAwesomeIcon icon={tech.icon} size="3x" />
+                )}
+                <p>{tech.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="marquee-wrapper">
+          <div className="marquee-track track-right">
+            {[...techIcons.slice(6), ...techIcons.slice(6), ...techIcons.slice(6), ...techIcons.slice(6)].map((tech, index) => (
+              <div key={index} className="tech-icon">
+                {tech.isImage ? (
+                  <img
+                    src={tech.icon}
+                    alt={tech.label}
+                    className="tech-img"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <FontAwesomeIcon icon={tech.icon} size="3x" />
+                )}
+                <p>{tech.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PROJETOS */}
+      <section id="projetos" className="projects reveal">
+        <h2>Meus Projetos ({projectCount})</h2>
+        <p>Um pouco de alguns projetos pessoais e trabalhos que participei</p>
+
+        <div className="projects-grid">
+          {projects.map((project, idx) => (
+            <div className="project-card reveal" key={idx} style={{ transitionDelay: `${idx * 0.1}s` }}>
+              <div className="card-image-placeholder">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="project-image"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+
+              <div className="card-info">
+                <h3 className="card-title">{project.title}</h3>
+                <p className="card-description">{project.description}</p>
+
+                <div className="card-tags">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className={`card-tag card-tag--${getTagCategory(tag)}`}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="card-buttons">
+                {project.code !== '#' ? (
+                  <a
+                    href={project.code}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-outline"
+                  >
+                    <FontAwesomeIcon icon={faGithub} />
+                    Código
+                  </a>
+                ) : (
+                  <button
+                    className="btn-outline"
+                    onClick={() =>
+                      showWarningAlert('Link de código ainda não disponível.')
+                    }
+                  >
+                    <FontAwesomeIcon icon={faGithub} />
+                    Código
+                  </button>
+                )}
+
+                {project.demo !== '#' ? (
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary"
+                  >
+                    Ver Projeto
+                  </a>
+                ) : (
+                  <button
+                    className="btn-primary"
+                    onClick={() =>
+                      showWarningAlert('Link de demonstração ainda não disponível.')
+                    }
+                  >
+                    Ver Projeto
+                  </button>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CONTATO */}
+      <LazySection
+        className="contact-lazy-wrapper reveal"
+        fallback={
+          <section id="contato" className="contact contact--loading">
+            <h2>Entre em contato</h2>
+            <p style={{ textAlign: 'center', color: '#9CA3AF' }}>Carregando formulário...</p>
+          </section>
+        }
+      >
+        <Suspense
+          fallback={
+            <section id="contato" className="contact contact--loading">
+              <h2>Entre em contato</h2>
+              <p style={{ textAlign: 'center', color: '#9CA3AF' }}>Carregando formulário...</p>
+            </section>
+          }
+        >
+          <ContatoForm />
+        </Suspense>
+      </LazySection>
+
+      {/* FOOTER */}
+      <footer className="footer">
+        <div className="social-icons">
+          <a
+            href="https://github.com/Pedroxbr16"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FontAwesomeIcon icon={faGithub} className="github" />
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/pedro-justo-463520298/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FontAwesomeIcon icon={faLinkedin} className="linkedin" />
+          </a>
+
+          <a
+            href="https://www.instagram.com/pedrojusto_/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FontAwesomeIcon icon={faInstagram} className="instagram" />
+          </a>
+        </div>
+        <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginTop: '16px' }}>© {new Date().getFullYear()} Pedro Justo. Todos os direitos reservados.</p>
+      </footer>
+    </div>
+  );
+}
