@@ -12,7 +12,6 @@
 <p align="center">
   <a href="#-sobre-mim">Sobre Mim</a> •
   <a href="#-tecnologias">Tecnologias</a> •
-  <a href="#-como-rodar-o-projeto">Como Rodar</a> •
   <a href="#-contato">Contato</a>
 </p>
 
@@ -46,28 +45,6 @@ Aqui estão algumas das ferramentas e tecnologias que utilizo no meu dia a dia:
 ### DevOps & Ferramentas
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
-
-## ⚙️ Como Rodar o Projeto
-
-Caso queira clonar este repositório e rodar o portfólio na sua máquina local, siga os passos:
-
-1. **Clone o repositório:**
-   ```bash
-   git clone https://github.com/Pedroxbr16/portfolio.git
-   ```
-2. **Acesse a pasta do projeto:**
-   ```bash
-   cd portfolio
-   ```
-3. **Instale as dependências:**
-   ```bash
-   npm install
-   ```
-4. **Inicie o servidor de desenvolvimento:**
-   ```bash
-   npm start
-   ```
-   > A aplicação estará disponível em `http://localhost:3000`
 
 ## 📞 Contato
 
