@@ -138,10 +138,16 @@ body {
   max-width: 1100px;
   margin: 60px auto;
   display: grid;
-  gap: 2rem;
+  column-gap: 2rem;
+  row-gap: 2.2rem;
   grid-template-columns: 1fr;
 }
-@media (min-width: 768px) {
+@media (min-width: 640px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
   .projects-grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -150,19 +156,27 @@ body {
   background: #fff;
   color: #000;
   border-radius: 12px;
+  border: 1px solid #e6e7eb;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.16);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  align-self: start;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.24);
+  border-color: #b5c7ff;
 }
 .card-image-placeholder {
   width: 100%;
-  height: 160px;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
 }
 .project-image {
   width: 100%;
@@ -170,36 +184,80 @@ body {
   object-fit: cover;
 }
 .card-info {
+  flex: 1;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 .card-title {
   font-size: 20px;
   font-weight: bold;
+  min-height: 56px;
+  line-height: 1.25;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .card-description {
   font-size: 14px;
   color: #333;
-  margin: 10px 0;
+  margin: 12px 0;
+  line-height: 1.35;
+  min-height: 58px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .card-tags {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 6px;
+  min-height: 28px;
 }
 .card-tag {
-  background-color: #eee;
-  color: #333;
+  background-color: #eceff3;
+  color: #3d4653;
   font-size: 12px;
-  padding: 4px 8px;
+  padding: 4px 10px;
+  font-weight: 600;
   border-radius: 12px;
+}
+.card-tag--frontend {
+  background-color: #e8f0ff;
+  color: #2f56b3;
+}
+.card-tag--backend {
+  background-color: #e7f8ef;
+  color: #1e7b4b;
+}
+.card-tag--database {
+  background-color: #f0ebff;
+  color: #6449bc;
+}
+.card-tag--docs {
+  background-color: #fff3e6;
+  color: #9b5a05;
+}
+.card-tag--tooling {
+  background-color: #e8f8fa;
+  color: #176a79;
+}
+.card-tag--security {
+  background-color: #ffe9ea;
+  color: #a02d3b;
 }
 .card-buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   gap: 12px;
-  margin-top: 20px;
+  margin-top: auto;
+  padding-top: 16px;
   flex-wrap: wrap;
+  width: 100%;
 }
 .btn-outline,
 .btn-black {
@@ -211,6 +269,7 @@ body {
   align-items: center;
   gap: 6px;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 .btn-outline {
   display: flex;
@@ -224,7 +283,6 @@ body {
   background: transparent;
   color: black;
   text-decoration: none;
-  transition: 0.3s ease;
 }
 .btn-black {
   display: flex;
@@ -238,13 +296,28 @@ body {
   color: white;
   text-decoration: none;
   border: 1px solid #111;
-  transition: 0.3s ease;
 }
 .btn-outline:hover {
-  background: #f0f0f0;
+  background: #f3f4f6;
+  border-color: #111;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.12);
 }
 .btn-black:hover {
-  background-color: #222;
+  background-color: #1f2937;
+  border-color: #1f2937;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.2);
+}
+.btn-outline:active,
+.btn-black:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+.btn-outline:focus-visible,
+.btn-black:focus-visible {
+  outline: 2px solid #0061f1;
+  outline-offset: 2px;
 }
 .icon-left,
 .icon-right {
@@ -272,35 +345,76 @@ body {
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  max-width: 400px;
+  gap: 12px;
+  max-width: 420px;
   margin: 0 auto;
+  padding: 24px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #0c0f14, #0a0a0a);
+  border: 1px solid #1b1d21;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
 }
 .contact-form input,
 .contact-form textarea {
-  padding: 10px;
-  border-radius: 4px;
-  border: none;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #2a2f38;
   outline: none;
+  font: inherit;
+  color: #fff;
+  background: #0f141c;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #8f98a3;
+}
+.contact-form textarea {
+  min-height: 140px;
+  resize: vertical;
 }
 .contact-form button {
-  background: #0061f1;
+  background: linear-gradient(90deg, #0061f1, #2f82ff);
   color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
+  border: 1px solid #0061f1;
+  padding: 12px;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 600;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, filter 0.2s ease;
 }
 .contact-form button:hover {
-  background: #2875d9;
+  background: linear-gradient(90deg, #1a70f7, #4090ff);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 97, 241, 0.35);
 }
 .contact-form button:disabled {
   background: #4b5668;
+  border-color: #4b5668;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+.contact-form button:focus-visible,
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
+  outline: 2px solid #5da2ff;
+  outline-offset: 2px;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #4c8cf6;
+  background: #111924;
+  box-shadow: 0 0 0 3px rgba(0, 97, 241, 0.2);
 }
 .contact h2 {
   text-align: center;
-  margin: 0 0 20px;
+  margin: 0 0 18px;
+  font-size: 1.5em;
+  line-height: 1.1;
 }
 
 /* ---------- FOOTER ---------- */
@@ -368,8 +482,11 @@ body {
 
   .contact-form {
     margin: 0 auto;
-    padding: 0 4px;
+    padding: 18px;
     max-width: 100%;
+  }
+  .contact h2 {
+    font-size: 38px;
   }
 
   /* menu flutuante visível no mobile */
@@ -387,6 +504,11 @@ body {
     cursor: pointer;
     padding: 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .floating-button:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.35);
   }
   .menu-icon {
     width: 48px;

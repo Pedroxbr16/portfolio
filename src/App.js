@@ -67,8 +67,36 @@ const projects = [
     demo: 'https://escala.pedrojusto.com.br',
     image: '/montaEscala.png',
     tags: ['Next.js', 'CSS']
+  },
+  {
+    title: 'Monitor DOERJ',
+    description: 'Monitor do DOERJ com alertas por palavras-chave e seções, acervo local de edições em PDF por data e indexação no MongoDB para pesquisa rápida.',
+    code: '#',
+    demo: 'https://monitor.pedrojusto.com.br',
+    image: '/monitor-doerj.png',
+    tags: ['EJS', 'CSS', 'Node.js','MongoDB']
   }
 ];
+
+const tagCategoryMap = {
+  React: 'frontend',
+  CSS: 'frontend',
+  Bootstrap: 'frontend',
+  Docusaurus: 'docs',
+  Markdown: 'docs',
+  'Next.js': 'frontend',
+  'Node.js': 'backend',
+  EJS: 'backend',
+  Python: 'backend',
+  MySQL: 'database',
+  MongoDB: 'database',
+  Streamlit: 'tooling',
+  Pytube: 'tooling',
+};
+
+function getTagCategory(tag) {
+  return tagCategoryMap[tag] || 'default';
+}
 
 export default function Portfolio() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -160,7 +188,12 @@ export default function Portfolio() {
 
                 <div className="card-tags">
                   {project.tags.map((tag) => (
-                    <span key={tag} className="card-tag">{tag}</span>
+                    <span
+                      key={tag}
+                      className={`card-tag card-tag--${getTagCategory(tag)}`}
+                    >
+                      {tag}
+                    </span>
                   ))}
                 </div>
               </div>
