@@ -1,15 +1,17 @@
-import React, { Suspense, lazy, useState } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHtml5, faCss3Alt, faJs, faReact,
   faNodeJs, faPhp, faPython,
   faGithub, faLinkedin, faInstagram,
-  faDocker
+  faDocker, faGitAlt
 } from '@fortawesome/free-brands-svg-icons';
+import { FiArrowRight, FiMail } from 'react-icons/fi';
 import './App.css';
 import Navbar from './component/Navbar';
 import LazySection from './component/LazySection';
-import { showWarningAlert } from './component/SweetAlert';
+import ProjectCard from './component/ProjectCard';
+import { smoothScrollTo } from './utils/scroll';
 
 const ContatoForm = lazy(() => import('./component/ContatoForm'));
 
@@ -22,6 +24,7 @@ const techIcons = [
   { icon: faPhp, label: 'PHP' },
   { icon: faPython, label: 'Python' },
   { icon: faDocker, label: 'Docker' },
+  { icon: faGitAlt, label: 'Git' },
   { icon: '/ejs.svg', label: 'EJS', isImage: true },
   { icon: '/sql.svg', label: 'SQL', isImage: true },
   { icon: '/mongo.svg', label: 'MongoDB', isImage: true },
@@ -62,7 +65,7 @@ const projects = [
   },
   {
     title: 'Montador de Escalas',
-    description: 'Sistema web self-service para montar escalas de forma rápida e inteligente,facilitando a gestão da equipe.',
+    description: 'Sistema web self-service para montar escalas de forma rápida e inteligente, facilitando a gestão da equipe.',
     code:'https://github.com/Pedroxbr16/MakeSchedule',
     demo: 'https://escala.pedrojusto.com.br',
     image: '/montaEscala.png',
@@ -99,9 +102,28 @@ function getTagCategory(tag) {
 }
 
 export default function Portfolio() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const projectCount = projects.length;
-  const toggleMenu = () => setMenuOpen(!menuOpen);
+
+  useEffect(() => {
+    const reveals = document.querySelectorAll('.reveal');
+
+    const revealOnScroll = () => {
+      const windowHeight = window.innerHeight;
+      const elementVisible = 100;
+
+      reveals.forEach((reveal) => {
+        const elementTop = reveal.getBoundingClientRect().top;
+        if (elementTop < windowHeight - elementVisible) {
+          reveal.classList.add('active');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll(); // Trigger on load
+
+    return () => window.removeEventListener('scroll', revealOnScroll);
+  }, []);
 
   return (
     <div className="container">
@@ -110,148 +132,138 @@ export default function Portfolio() {
       {/* HOME */}
       <section id="home" className="intro">
         <div className="intro-content">
-          <div className="intro-text">
+          <div className="intro-text reveal">
             <h1>Pedro Justo</h1>
             <p className="subtitle">Desenvolvedor FullStack</p>
 
             <p className="description">
-              Desenvolvo aplicações web com foco em Node.js e EJS, criando
-              sistemas server-side com interfaces dinâmicas, rotas bem
-              estruturadas e integração com banco de dados.
+              Sou desenvolvedor Full Stack com foco em Node.js, EJS e React, criando aplicações web de ponta a ponta com interfaces dinâmicas, regras de negócio bem definidas e integrações com bancos de dados como MySQL e MongoDB. Atuo desde a modelagem e estruturação de rotas até a entrega da interface, sempre priorizando organização de código, manutenção e performance.
             </p>
 
             <p className="description">
-              Meu objetivo é entregar soluções simples, performáticas e
-              escaláveis, com código organizado e foco em resolver problemas
-              reais de negócio. Também tenho experiência com React e APIs
-              REST, complementando o desenvolvimento fullstack quando
-              necessário.
+              Nos projetos que desenvolvi, construí soluções como sistemas de gestão, monitoramento e ferramentas web orientadas a problemas reais. Meu objetivo é entregar produtos simples de usar, escaláveis e confiáveis, com atenção à experiência do usuário, qualidade técnica e evolução contínua do sistema.
             </p>
+
+            <div className="hero-buttons">
+              <a href="#projetos" className="btn-primary" onClick={(e) => {
+                e.preventDefault();
+                smoothScrollTo('projetos');
+              }}>
+                Ver Projetos <FiArrowRight />
+              </a>
+              <a href="#contato" className="btn-outline" onClick={(e) => {
+                e.preventDefault();
+                smoothScrollTo('contato');
+              }}>
+                Fale Comigo <FiMail />
+              </a>
+            </div>
           </div>
 
-          <img
-            src="/user.png"
-            alt="Pedro Justo"
-            className="profile-img"
-            loading="eager"
-            fetchPriority="high"
-            decoding="async"
-          />
+          <div className="profile-img-container reveal">
+            {/* Ícones flutuantes */}
+            <div className="floating-icon icon-react">
+              <FontAwesomeIcon icon={faReact} />
+            </div>
+            <div className="floating-icon icon-node">
+              <FontAwesomeIcon icon={faNodeJs} />
+            </div>
+            <div className="floating-icon icon-php">
+              <FontAwesomeIcon icon={faPhp} />
+            </div>
+            <div className="floating-icon icon-js">
+              <FontAwesomeIcon icon={faJs} />
+            </div>
+            <div className="floating-icon icon-html">
+              <FontAwesomeIcon icon={faHtml5} />
+            </div>
+            <div className="floating-icon icon-python">
+              <FontAwesomeIcon icon={faPython} />
+            </div>
+
+            <img
+              src="/user.png"
+              alt="Pedro Justo"
+              className="profile-img"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+            />
+          </div>
         </div>
       </section>
 
       {/* TECNOLOGIAS */}
-      <section id="tecnologias" className="tech-section">
-        <h1 className="tech-title">Tecnologias que mais utilizo</h1>
+      <section id="tecnologias" className="tech-section reveal">
+        <h2 className="tech-title">Tecnologias que mais utilizo</h2>
 
-        <div className="tech-icons-container">
-          {techIcons.map((tech, index) => (
-            <div key={index} className="tech-icon">
-              {tech.isImage ? (
-                <img
-                  src={tech.icon}
-                  alt={tech.label}
-                  className="tech-img"
-                  loading="lazy"
-                  decoding="async"
-                />
-              ) : (
-                <FontAwesomeIcon icon={tech.icon} size="3x" />
-              )}
-              <p>{tech.label}</p>
-            </div>
-          ))}
+        <div className="marquee-wrapper">
+          <div className="marquee-track track-left">
+            {[...techIcons.slice(0, 6), ...techIcons.slice(0, 6), ...techIcons.slice(0, 6), ...techIcons.slice(0, 6)].map((tech, index) => (
+              <div key={index} className="tech-icon">
+                {tech.isImage ? (
+                  <img
+                    src={tech.icon}
+                    alt={tech.label}
+                    className="tech-img"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <FontAwesomeIcon icon={tech.icon} size="3x" />
+                )}
+                <p>{tech.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="marquee-wrapper">
+          <div className="marquee-track track-right">
+            {[...techIcons.slice(6), ...techIcons.slice(6), ...techIcons.slice(6), ...techIcons.slice(6)].map((tech, index) => (
+              <div key={index} className="tech-icon">
+                {tech.isImage ? (
+                  <img
+                    src={tech.icon}
+                    alt={tech.label}
+                    className="tech-img"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <FontAwesomeIcon icon={tech.icon} size="3x" />
+                )}
+                <p>{tech.label}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* PROJETOS */}
-      <section id="projetos" className="projects">
+      <section id="projetos" className="projects reveal">
         <h2>Meus Projetos ({projectCount})</h2>
         <p>Um pouco de alguns projetos pessoais e trabalhos que participei</p>
 
         <div className="projects-grid">
           {projects.map((project, idx) => (
-            <div className="project-card" key={idx}>
-              <div className="card-image-placeholder">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="project-image"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-
-              <div className="card-info">
-                <h3 className="card-title">{project.title}</h3>
-                <p className="card-description">{project.description}</p>
-
-                <div className="card-tags">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className={`card-tag card-tag--${getTagCategory(tag)}`}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="card-buttons">
-                {project.code !== '#' ? (
-                  <a
-                    href={project.code}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-outline"
-                  >
-                    <FontAwesomeIcon icon={faGithub} className="icon-left" />
-                    Código
-                  </a>
-                ) : (
-                  <button
-                    className="btn-outline"
-                    onClick={() =>
-                      showWarningAlert('Link de código ainda não disponível.')
-                    }
-                  >
-                    Código
-                  </button>
-                )}
-
-                {project.demo !== '#' ? (
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-black"
-                  >
-                    Ver Projeto
-                  </a>
-                ) : (
-                  <button
-                    className="btn-black"
-                    onClick={() =>
-                      showWarningAlert('Link de demonstração ainda não disponível.')
-                    }
-                  >
-                    Ver Projeto
-                  </button>
-                )}
-              </div>
-            </div>
+            <ProjectCard
+              key={project.title}
+              project={project}
+              getTagCategory={getTagCategory}
+              transitionDelay={`${idx * 0.1}s`}
+            />
           ))}
         </div>
       </section>
 
       {/* CONTATO */}
       <LazySection
-        className="contact-lazy-wrapper"
+        className="contact-lazy-wrapper reveal"
         fallback={
           <section id="contato" className="contact contact--loading">
             <h2>Entre em contato</h2>
-            <p className="contact-loading-text">Carregando formulario...</p>
+            <p style={{ textAlign: 'center', color: '#9CA3AF' }}>Carregando formulário...</p>
           </section>
         }
       >
@@ -259,7 +271,7 @@ export default function Portfolio() {
           fallback={
             <section id="contato" className="contact contact--loading">
               <h2>Entre em contato</h2>
-              <p className="contact-loading-text">Carregando formulario...</p>
+              <p style={{ textAlign: 'center', color: '#9CA3AF' }}>Carregando formulário...</p>
             </section>
           }
         >
@@ -294,23 +306,8 @@ export default function Portfolio() {
             <FontAwesomeIcon icon={faInstagram} className="instagram" />
           </a>
         </div>
+        <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginTop: '16px' }}>© {new Date().getFullYear()} Pedro Justo. Todos os direitos reservados.</p>
       </footer>
-
-      {/* MENU FLUTUANTE (mobile) */}
-      <div className="floating-nav">
-        <button className="floating-button" onClick={toggleMenu}>
-          <img src="/trace.svg" alt="Menu" className="menu-icon" />
-        </button>
-
-        {menuOpen && (
-          <div className="floating-menu">
-            <a href="#home" onClick={toggleMenu}>Home</a>
-            <a href="#tecnologias" onClick={toggleMenu}>Tecnologias</a>
-            <a href="#projetos" onClick={toggleMenu}>Projetos</a>
-            <a href="#contato" onClick={toggleMenu}>Contato</a>
-          </div>
-        )}
-      </div>
     </div>
   );
 }

@@ -1,25 +1,15 @@
 .navbar {
-  background-color: #000;
-  border-bottom: 1px solid #333;
-  padding: 20px;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 100vw;        /* <- impede estourar a viewport */
-  overflow-x: hidden;      /* <- não deixa transbordar horizontal */
-  box-sizing: border-box;  /* <- padding conta dentro da largura */
-}
-
-.github,
-.instagram,
-.linkedin {
-  width: 32px;
-  height: 32px;
-}
-
-.logo-img {
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
+  z-index: 1000;
+  background: rgba(11, 15, 25, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 16px 0;
+  transition: all 0.3s ease;
 }
 
 .nav-container {
@@ -27,46 +17,63 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 40px;
-  flex-wrap: wrap;
   margin: 0 auto;
-  box-sizing: border-box;
+  max-width: 1200px;
   width: 100%;
+  box-sizing: border-box;
 }
 
-/* LINKS (meio) */
+.logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+  transform: scale(1.1);
+}
+
 .nav-links {
   display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+  gap: 32px;
+  align-items: center;
 }
 
 .nav-links a {
-  color: #fff;
+  color: var(--text-main);
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 500;
+  font-size: 15px;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  transition: width 0.3s ease;
+  border-radius: 2px;
 }
 
 .nav-links a:hover {
-  color: #027e97;
+  color: var(--accent-primary);
 }
 
-/* isso some os "____" do hub */
-.nav-links--placeholder {
-  display: none;
+.nav-links a:hover::after {
+  width: 100%;
 }
 
-/* SOCIAL (direita) */
 .social-icons {
   display: flex;
-  gap: 10px;
+  gap: 16px;
 }
 
-.social-icons svg {
-  color: #fff;
-  cursor: pointer;
-}
-
-/* Ícones sociais com hover animado */
 .social-icons a {
   width: 40px;
   height: 40px;
@@ -79,7 +86,7 @@
 }
 
 .social-icons a svg {
-  color: #fff;
+  color: var(--text-main);
   font-size: 18px;
   transition: all 0.3s ease;
 }
@@ -93,48 +100,70 @@
   color: #000;
 }
 
-.social-icons a:hover .github { color: #171515; }
-.social-icons a:hover .linkedin { color: #0077b5; }
-.social-icons a:hover .instagram { color: #e4405f; }
+.social-icons a:hover .github {
+  color: #171515;
+}
 
-/* ===================== */
-/*   RESPONSIVIDADE      */
-/* ===================== */
+.social-icons a:hover .linkedin {
+  color: #0077b5;
+}
+
+.social-icons a:hover .instagram {
+  color: #e4405f;
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-main);
+  font-size: 24px;
+  cursor: pointer;
+}
 
 @media (max-width: 768px) {
-  /* navbar inteira some no mobile QUANDO for a versão do portfólio */
-  .navbar.navbar--portfolio {
-    display: none;
+  .nav-container {
+    padding: 0 20px;
   }
 
-  /* mantém a do hub visível */
-  .navbar.navbar--hub {
+  .mobile-menu-btn {
     display: block;
   }
 
-  /* reduzir paddings pra caber 100% sem criar overflow */
-  .nav-container {
-    padding: 0 16px;
-    row-gap: 12px;
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(11, 15, 25, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    flex-direction: column;
+    gap: 0;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.4s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
-  /* links podem quebrar linha bonitinho */
-  .nav-links {
-    flex-basis: 100%;
-    justify-content: center;
-    text-align: center;
+  .nav-links.open {
+    max-height: 300px;
   }
 
   .nav-links a {
-    font-size: 14px;
+    width: 100%;
+    padding: 16px 20px;
+    box-sizing: border-box;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
-  .social-icons a {
-    width: 36px;
-    height: 36px;
+  .nav-links a::after {
+    display: none;
   }
 
-  .social-icons a svg {
-    font-size: 16px;
+  .social-icons {
+    display: none; /* Hide social in mobile header to keep it clean */
   }
 }
