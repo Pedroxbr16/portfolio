@@ -10,7 +10,7 @@ import { FiArrowRight, FiMail } from 'react-icons/fi';
 import './App.css';
 import Navbar from './component/Navbar';
 import LazySection from './component/LazySection';
-import { showWarningAlert } from './component/SweetAlert';
+import ProjectCard from './component/ProjectCard';
 import { smoothScrollTo } from './utils/scroll';
 
 const ContatoForm = lazy(() => import('./component/ContatoForm'));
@@ -247,77 +247,12 @@ export default function Portfolio() {
 
         <div className="projects-grid">
           {projects.map((project, idx) => (
-            <div className="project-card reveal" key={idx} style={{ transitionDelay: `${idx * 0.1}s` }}>
-              <div className="card-image-placeholder">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="project-image"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-
-              <div className="card-info">
-                <h3 className="card-title">{project.title}</h3>
-                <p className="card-description">{project.description}</p>
-
-                <div className="card-tags">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className={`card-tag card-tag--${getTagCategory(tag)}`}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="card-buttons">
-                {project.code !== '#' ? (
-                  <a
-                    href={project.code}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-outline"
-                  >
-                    <FontAwesomeIcon icon={faGithub} />
-                    Código
-                  </a>
-                ) : (
-                  <button
-                    className="btn-outline"
-                    onClick={() =>
-                      showWarningAlert('Link de código ainda não disponível.')
-                    }
-                  >
-                    <FontAwesomeIcon icon={faGithub} />
-                    Código
-                  </button>
-                )}
-
-                {project.demo !== '#' ? (
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-primary"
-                  >
-                    Ver Projeto
-                  </a>
-                ) : (
-                  <button
-                    className="btn-primary"
-                    onClick={() =>
-                      showWarningAlert('Link de demonstração ainda não disponível.')
-                    }
-                  >
-                    Ver Projeto
-                  </button>
-                )}
-              </div>
-            </div>
+            <ProjectCard
+              key={project.title}
+              project={project}
+              getTagCategory={getTagCategory}
+              transitionDelay={`${idx * 0.1}s`}
+            />
           ))}
         </div>
       </section>

@@ -75,31 +75,41 @@
 }
 
 .social-icons a {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .social-icons a svg {
   color: var(--text-main);
-  font-size: 16px;
+  font-size: 18px;
   transition: all 0.3s ease;
 }
 
 .social-icons a:hover {
-  background: var(--text-main);
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+  background-color: #fff;
+  transform: translateY(-3px) scale(1.1);
 }
 
 .social-icons a:hover svg {
-  color: var(--bg-primary);
+  color: #000;
+}
+
+.social-icons a:hover .github {
+  color: #171515;
+}
+
+.social-icons a:hover .linkedin {
+  color: #0077b5;
+}
+
+.social-icons a:hover .instagram {
+  color: #e4405f;
 }
 
 /* Mobile Menu Toggle */

@@ -1,0 +1,57 @@
+.swal2-container.swal2-backdrop-show {
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  background: rgba(3, 7, 18, 0.6);
+}
+
+.swal2-popup.pj-swal-popup {
+  width: min(92vw, 460px);
+  border-radius: 20px;
+  padding: 28px 24px 22px;
+  background:
+    linear-gradient(145deg, rgba(17, 24, 39, 0.95), rgba(11, 15, 25, 0.95));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.5);
+  color: #f9fafb;
+}
+
+.swal2-popup.pj-swal-popup .pj-swal-title {
+  margin-top: 4px;
+  font-size: 34px;
+  font-weight: 700;
+  color: #f9fafb;
+}
+
+.swal2-popup.pj-swal-popup .pj-swal-text {
+  margin: 8px 0 4px;
+  font-size: 18px;
+  line-height: 1.55;
+  color: #9ca3af;
+}
+
+.swal2-popup.pj-swal-popup .pj-swal-icon {
+  margin: 0 auto 8px;
+}
+
+.swal2-popup.pj-swal-popup .pj-swal-confirm {
+  margin-top: 12px;
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 22px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.35);
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.swal2-popup.pj-swal-popup .pj-swal-confirm:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.swal2-popup.pj-swal-popup .pj-swal-confirm:focus-visible {
+  outline: 2px solid rgba(147, 197, 253, 0.8);
+  outline-offset: 2px;
+}
