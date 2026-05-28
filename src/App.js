@@ -137,11 +137,11 @@ export default function Portfolio() {
             <p className="subtitle">Desenvolvedor FullStack</p>
 
             <p className="description">
-              Desenvolvo aplicações web com foco em Node.js e EJS, criando sistemas server-side com interfaces dinâmicas, rotas bem estruturadas e integração com banco de dados.
+              Sou desenvolvedor Full Stack com foco em Node.js, EJS e React, criando aplicações web de ponta a ponta com interfaces dinâmicas, regras de negócio bem definidas e integrações com bancos de dados como MySQL e MongoDB. Atuo desde a modelagem e estruturação de rotas até a entrega da interface, sempre priorizando organização de código, manutenção e performance.
             </p>
 
             <p className="description">
-              Meu objetivo é entregar soluções simples, performáticas e escaláveis, com código organizado e foco em resolver problemas reais de negócio. Tenho experiência com React e APIs REST.
+              Nos projetos que desenvolvi, construí soluções como sistemas de gestão, monitoramento e ferramentas web orientadas a problemas reais. Meu objetivo é entregar produtos simples de usar, escaláveis e confiáveis, com atenção à experiência do usuário, qualidade técnica e evolução contínua do sistema.
             </p>
 
             <div className="hero-buttons">

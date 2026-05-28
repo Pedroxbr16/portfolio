@@ -227,7 +227,7 @@ body {
   overflow: hidden;
   width: 100%;
   max-width: 1000px;
-  margin: 0 auto 24px auto; /* Centraliza na tela e afasta os cantos */
+  margin: 0 auto 24px auto;
   position: relative;
   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
@@ -255,7 +255,7 @@ body {
 
 @keyframes scrollLeft {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-25%); } /* Transforma apenas 1/4 (1 set de 4 duplicados) para um loop perfeito */
+  100% { transform: translateX(-25%); }
 }
 
 @keyframes scrollRight {
@@ -276,7 +276,7 @@ body {
   align-items: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   cursor: pointer;
-  flex-shrink: 0; /* Impede que os ícones encolham no flex */
+  flex-shrink: 0;
 }
 
 .tech-icon:hover {
@@ -353,7 +353,6 @@ body {
 }
 
 .project-card:hover {
-  transform: translateY(-10px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   border-color: rgba(139, 92, 246, 0.3);
 }
@@ -371,10 +370,6 @@ body {
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
-}
-
-.project-card:hover .project-image {
-  transform: scale(1.05);
 }
 
 .card-info {
@@ -556,18 +551,45 @@ body {
 .footer .social-icons {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 16px;
 }
 
 .footer .social-icons a {
-  color: var(--text-muted);
-  font-size: 24px;
-  transition: color 0.3s ease, transform 0.3s ease;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.footer .social-icons a svg {
+  color: var(--text-main);
+  font-size: 18px;
+  transition: all 0.3s ease;
 }
 
 .footer .social-icons a:hover {
-  color: var(--text-main);
-  transform: translateY(-3px);
+  background-color: #fff;
+  transform: translateY(-3px) scale(1.1);
+}
+
+.footer .social-icons a:hover svg {
+  color: #000;
+}
+
+.footer .social-icons a:hover .github {
+  color: #171515;
+}
+
+.footer .social-icons a:hover .linkedin {
+  color: #0077b5;
+}
+
+.footer .social-icons a:hover .instagram {
+  color: #e4405f;
 }
 
 /* ---------- RESPONSIVIDADE ---------- */
