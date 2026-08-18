@@ -48,22 +48,6 @@ const projects = [
     tags: ['Docusaurus', 'Markdown']
   },
   {
-    title: 'Encurtador de Links',
-    description: 'Aplicativo web para encurtar URLs de forma rápida e prática, com interface simples e intuitiva.',
-    code: 'https://github.com/Pedroxbr16/encurtador',
-    demo: 'https://encurtador.streamlit.app',
-    image: '/encurtador.png',
-    tags: ['Python', 'Streamlit']
-  },
-  {
-    title: 'Baixador de Vídeos',
-    description: 'Ferramenta em Python com Streamlit para baixar vídeos do YouTube de forma prática.',
-    code: 'https://github.com/Pedroxbr16/baixador_videos',
-    demo: 'https://baixador.streamlit.app',
-    image: '/baixador.png',
-    tags: ['Python', 'Streamlit', 'Pytube']
-  },
-  {
     title: 'Montador de Escalas',
     description: 'Sistema web self-service para montar escalas de forma rápida e inteligente, facilitando a gestão da equipe.',
     code:'https://github.com/Pedroxbr16/MakeSchedule',
@@ -71,14 +55,6 @@ const projects = [
     image: '/montaEscala.png',
     tags: ['Next.js', 'CSS']
   },
-  {
-    title: 'Monitor DOERJ',
-    description: 'Monitor do DOERJ com alertas por palavras-chave e seções, acervo local de edições em PDF por data e indexação no MongoDB para pesquisa rápida.',
-    code: '#',
-    demo: 'https://monitor.pedrojusto.com.br',
-    image: '/monitor-doerj.png',
-    tags: ['EJS', 'CSS', 'Node.js','MongoDB']
-  }
 ];
 
 const tagCategoryMap = {
