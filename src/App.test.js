@@ -1,8 +1,17 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('renders the Vira converter project', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+
+  const title = screen.getByRole('heading', {
+    name: 'Vira — Conversor de Arquivos'
+  });
+  const card = title.closest('.project-card');
+  const projectLink = within(card).getByRole('link', { name: /ver projeto/i });
+
+  expect(projectLink).toHaveAttribute(
+    'href',
+    'https://conversor.pedrojusto.com.br'
+  );
 });

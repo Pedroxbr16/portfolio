@@ -32,6 +32,14 @@ const techIcons = [
 
 const projects = [
   {
+    title: 'Vira — Conversor de Arquivos',
+    description: 'Conversor online de documentos e imagens, com suporte a múltiplos formatos e processamento de até 10 arquivos por vez.',
+    code: '#',
+    demo: 'https://conversor.pedrojusto.com.br',
+    image: '/conversor.png',
+    tags: ['React', 'CSS']
+  },
+  {
     title: 'Gestão de Clínica',
     description: 'Sistema de gestão clínica com agenda médica, cadastro de pacientes e módulo financeiro integrado.',
     code: 'https://github.com/Pedroxbr16/clinica-node',
