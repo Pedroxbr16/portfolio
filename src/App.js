@@ -36,7 +36,7 @@ const projects = [
     description: 'Conversor online de documentos e imagens, com suporte a múltiplos formatos e processamento de até 10 arquivos por vez.',
     code: '#',
     demo: 'https://conversor.pedrojusto.com.br',
-    image: '/conversor.png',
+    image: '/conversor.webp',
     tags: ['React', 'CSS']
   },
   {
@@ -44,7 +44,7 @@ const projects = [
     description: 'Sistema de gestão clínica com agenda médica, cadastro de pacientes e módulo financeiro integrado.',
     code: 'https://github.com/Pedroxbr16/clinica-node',
     demo: 'https://clinica.pedrojusto.com.br',
-    image: '/clinica.png',
+    image: '/clinica.webp',
     tags: ['React', 'CSS', 'Bootstrap', 'Node.js', 'MySQL']
   },
   {
@@ -52,7 +52,7 @@ const projects = [
     description: 'Documentação criada com Docusaurus para organizar conteúdos técnicos.',
     code: 'https://github.com/Pedroxbr16/documentacao-geral',
     demo: 'https://documentacao.pedrojusto.com.br',
-    image: '/documentacao.png',
+    image: '/documentacao.webp',
     tags: ['Docusaurus', 'Markdown']
   },
   {
@@ -60,7 +60,7 @@ const projects = [
     description: 'Sistema web self-service para montar escalas de forma rápida e inteligente, facilitando a gestão da equipe.',
     code:'https://github.com/Pedroxbr16/MakeSchedule',
     demo: 'https://escala.pedrojusto.com.br',
-    image: '/montaEscala.png',
+    image: '/montaEscala.webp',
     tags: ['Next.js', 'CSS']
   },
 ];
@@ -91,22 +91,26 @@ export default function Portfolio() {
   useEffect(() => {
     const reveals = document.querySelectorAll('.reveal');
 
-    const revealOnScroll = () => {
-      const windowHeight = window.innerHeight;
-      const elementVisible = 100;
+    if (!('IntersectionObserver' in window)) {
+      reveals.forEach((reveal) => reveal.classList.add('active'));
+      return undefined;
+    }
 
-      reveals.forEach((reveal) => {
-        const elementTop = reveal.getBoundingClientRect().top;
-        if (elementTop < windowHeight - elementVisible) {
-          reveal.classList.add('active');
-        }
-      });
-    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -80px', threshold: 0.01 }
+    );
 
-    window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll(); // Trigger on load
+    reveals.forEach((reveal) => observer.observe(reveal));
 
-    return () => window.removeEventListener('scroll', revealOnScroll);
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -166,9 +170,11 @@ export default function Portfolio() {
             </div>
 
             <img
-              src="/user.png"
+              src="/user.webp"
               alt="Pedro Justo"
               className="profile-img"
+              width="350"
+              height="350"
               loading="eager"
               fetchPriority="high"
               decoding="async"
@@ -183,7 +189,7 @@ export default function Portfolio() {
 
         <div className="marquee-wrapper">
           <div className="marquee-track track-left">
-            {[...techIcons.slice(0, 6), ...techIcons.slice(0, 6), ...techIcons.slice(0, 6), ...techIcons.slice(0, 6)].map((tech, index) => (
+            {[...techIcons.slice(0, 6), ...techIcons.slice(0, 6)].map((tech, index) => (
               <div key={index} className="tech-icon">
                 {tech.isImage ? (
                   <img
@@ -204,7 +210,7 @@ export default function Portfolio() {
 
         <div className="marquee-wrapper">
           <div className="marquee-track track-right">
-            {[...techIcons.slice(6), ...techIcons.slice(6), ...techIcons.slice(6), ...techIcons.slice(6)].map((tech, index) => (
+            {[...techIcons.slice(6), ...techIcons.slice(6)].map((tech, index) => (
               <div key={index} className="tech-icon">
                 {tech.isImage ? (
                   <img

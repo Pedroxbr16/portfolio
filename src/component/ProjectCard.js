@@ -15,6 +15,8 @@ export default function ProjectCard({ project, getTagCategory, transitionDelay }
           src={project.image}
           alt={project.title}
           className="project-image"
+          width="800"
+          height="450"
           loading="lazy"
           decoding="async"
         />

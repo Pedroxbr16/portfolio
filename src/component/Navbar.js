@@ -31,7 +31,14 @@ export default function Navbar({ projectCount }) {
             e.preventDefault();
             smoothScrollTo('home');
           }}>
-            <img src="/favicon.png" alt="Logo de Pedro Justo" className="logo-img" />
+            <img
+              src="/brand-icon.webp"
+              alt="Logo de Pedro Justo"
+              className="logo-img"
+              width="40"
+              height="40"
+              decoding="async"
+            />
           </a>
         </div>
 

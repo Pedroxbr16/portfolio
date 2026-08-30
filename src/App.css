@@ -37,7 +37,8 @@ body {
 .reveal {
   opacity: 0;
   transform: translateY(40px);
-  transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+  transition: opacity 0.8s cubic-bezier(0.5, 0, 0, 1),
+    transform 0.8s cubic-bezier(0.5, 0, 0, 1);
 }
 
 .reveal.active {
@@ -142,15 +143,14 @@ body {
   z-index: 1; /* Coloca atrás da imagem (que tem z-index: 2) */
   font-size: 35px; /* Reduzi um pouco para caber mais */
   border-radius: 50%;
-  background: rgba(11, 15, 25, 0.6);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(11, 15, 25, 0.9);
   padding: 10px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
+  will-change: transform;
 }
 
 .icon-react {
@@ -239,6 +239,7 @@ body {
   width: max-content;
   gap: 24px;
   padding: 10px 0;
+  will-change: transform;
 }
 
 .track-left {
@@ -255,19 +256,17 @@ body {
 
 @keyframes scrollLeft {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-25%); }
+  100% { transform: translateX(-50%); }
 }
 
 @keyframes scrollRight {
-  0% { transform: translateX(-25%); }
+  0% { transform: translateX(-50%); }
   100% { transform: translateX(0); }
 }
 
 .tech-icon {
-  background: var(--glass-bg);
+  background: rgba(17, 24, 39, 0.9);
   border: 1px solid var(--border-color);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   border-radius: 16px;
   padding: 24px;
   width: 120px;
@@ -349,7 +348,8 @@ body {
   gap: 8px;
   cursor: pointer;
   font-weight: 600;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    box-shadow 0.2s ease, filter 0.2s ease, transform 0.2s ease;
   flex: 1;
 }
 
@@ -508,6 +508,10 @@ body {
 
 /* ---------- RESPONSIVIDADE ---------- */
 @media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
   .intro {
     padding: 120px 20px 60px;
     text-align: center;
@@ -550,5 +554,23 @@ body {
 
   .contact-form {
     padding: 24px;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .floating-icon,
+  .marquee-track {
+    animation: none;
   }
 }
