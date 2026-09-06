@@ -33,11 +33,11 @@ const techIcons = [
 const projects = [
   {
     title: 'Vira — Conversor de Arquivos',
-    description: 'Conversor online de documentos e imagens, com suporte a múltiplos formatos e processamento de até 10 arquivos por vez.',
+    description: 'Conversor online de PDFs, documentos, planilhas, apresentações, imagens e vídeos, com suporte a múltiplos formatos.',
     code: '#',
     demo: 'https://conversor.pedrojusto.com.br',
     image: '/conversor.webp',
-    tags: ['React', 'CSS']
+    tags: ['React', 'Docker', 'FFmpeg', 'LibreOffice']
   },
   {
     title: 'Gestão de Clínica',
