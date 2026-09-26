@@ -33,35 +33,111 @@ const techIcons = [
 const projects = [
   {
     title: 'Vira — Conversor de Arquivos',
-    description: 'Conversor online de PDFs, documentos, planilhas, apresentações, imagens e vídeos, com suporte a múltiplos formatos.',
+    description: 'Conversor web para PDFs, documentos, planilhas, apresentações, imagens e vídeos. Processa até 10 arquivos por lote e reúne múltiplos resultados em um arquivo ZIP.',
     code: '#',
     demo: 'https://conversor.pedrojusto.com.br',
     image: '/conversor.webp',
-    tags: ['React', 'Docker', 'FFmpeg', 'LibreOffice']
+    role: 'Desenvolvimento full stack do produto',
+    details: 'O Vira reúne em uma única interface conversões que normalmente exigem ferramentas diferentes. O usuário seleciona documentos, imagens ou vídeos, define o formato de saída e acompanha o processamento; quando há vários resultados, a aplicação prepara um único arquivo ZIP para download.',
+    highlights: [
+      'Conversão de PDFs, arquivos Office, imagens e vídeos em dezenas de formatos',
+      'Processamento em lote de até 10 arquivos, com download agrupado em ZIP',
+      'Pipeline de conversão com LibreOffice, ImageMagick, Poppler e FFmpeg',
+      'Aplicação instalável como PWA e limpeza automática dos arquivos temporários'
+    ],
+    tags: ['React', 'Express', 'Vite', 'FFmpeg', 'LibreOffice', 'Docker']
   },
   {
     title: 'Gestão de Clínica',
-    description: 'Sistema de gestão clínica com agenda médica, cadastro de pacientes e módulo financeiro integrado.',
+    description: 'Plataforma para a operação de clínicas, com pacientes, profissionais, agenda, histórico clínico, exames, receitas, pagamentos e indicadores financeiros.',
     code: 'https://github.com/Pedroxbr16/clinica-node',
     demo: 'https://clinica.pedrojusto.com.br',
     image: '/clinica.webp',
-    tags: ['React', 'CSS', 'Bootstrap', 'Node.js', 'MySQL']
-  },
-  {
-    title: 'Documentação',
-    description: 'Documentação criada com Docusaurus para organizar conteúdos técnicos.',
-    code: 'https://github.com/Pedroxbr16/documentacao-geral',
-    demo: 'https://documentacao.pedrojusto.com.br',
-    image: '/documentacao.webp',
-    tags: ['Docusaurus', 'Markdown']
+    role: 'Desenvolvimento full stack da plataforma',
+    details: 'A solução integra aplicação web, API e aplicativo móvel. Administradores, médicos e atendentes acessam fluxos específicos para organizar pacientes, consultas, prontuários e rotinas financeiras, enquanto o aplicativo amplia o acesso a cadastro e pré-agendamento.',
+    highlights: [
+      'Agenda clínica com tipos de consulta, cadastro e pré-agendamento',
+      'Histórico do paciente, pedidos de exames, receitas, atestados e guias',
+      'Gestão de pacientes, médicos, atendentes e permissões por perfil',
+      'Pagamentos e dashboard com receita e volume de consultas'
+    ],
+    tags: ['React', 'Node.js', 'Express', 'MySQL', 'Docker']
   },
   {
     title: 'Montador de Escalas',
-    description: 'Sistema web self-service para montar escalas de forma rápida e inteligente, facilitando a gestão da equipe.',
+    description: 'Gerador de escalas com pessoas e funções em uma tabela personalizada, prévia instantânea e exportação do resultado em PNG.',
     code:'https://github.com/Pedroxbr16/MakeSchedule',
     demo: 'https://escala.pedrojusto.com.br',
     image: '/montaEscala.webp',
-    tags: ['Next.js', 'CSS']
+    role: 'Desenvolvimento front-end do produto',
+    details: 'O Montador de Escalas transforma o preenchimento de uma escala em um fluxo visual simples. Enquanto título, data, observações, nomes e funções são editados, o documento final é atualizado em tempo real; ao concluir, a aplicação gera uma imagem em alta resolução pronta para compartilhamento.',
+    highlights: [
+      'Linhas dinâmicas para adicionar ou remover pessoas e respectivas funções',
+      'Prévia instantânea de título, data, observações e tabela',
+      'Contagem das pessoas preenchidas e validação dos campos',
+      'Exportação em PNG de alta resolução gerada com Canvas'
+    ],
+    tags: ['Next.js', 'React', 'TypeScript', 'CSS']
+  },
+  {
+    title: 'SISGED — Gestão de Documentos',
+    description: 'Desenvolvi a versão 2.0 do SISGED, plataforma que centraliza o envio, a organização, a indexação, a publicação e a consulta de documentos da CGE/RJ. A solução reúne busca avançada, gestão por áreas, relatórios e trilhas de auditoria.',
+    acronym: 'SISGED',
+    institutional: true,
+    previewType: 'documents',
+    role: 'Desenvolvimento da versão 2.0',
+    details: 'O SISGED organiza todo o ciclo de documentos institucionais em um único ambiente. A plataforma permite cadastrar arquivos e links, extrair conteúdo para pesquisa, controlar o acesso por área, importar documentos do Nextcloud e acompanhar indicadores e registros de auditoria.',
+    highlights: [
+      'Nova experiência de envio, organização, publicação e consulta',
+      'Busca por metadados e indexação do conteúdo dos documentos',
+      'Relatórios gerenciais e notificação automática de novos uploads'
+    ],
+    tags: ['Node.js', 'Express', 'EJS', 'MongoDB', 'Docker']
+  },
+  {
+    title: 'SISCONFI — Contratos e Finanças',
+    description: 'Desenvolvi do zero o SISCONFI, plataforma que centraliza contratos e aditivos, pagamentos, fornecedores, unidades gestoras e publicações oficiais da CGE/RJ. Dashboards e alertas apoiam o acompanhamento de vigências, saldos e execução contratual.',
+    acronym: 'SISCONFI',
+    institutional: true,
+    previewType: 'finance',
+    role: 'Desenvolvimento do zero',
+    details: 'O SISCONFI reúne dados contratuais e financeiros antes distribuídos entre diferentes fontes. Em uma única visão, as equipes consultam contratos, aditivos, pagamentos, documentos financeiros, fornecedores, publicações oficiais, comissões de fiscalização e possíveis restrições cadastrais.',
+    highlights: [
+      'Consulta consolidada de contratos, aditivos, vigências, valores e saldos',
+      'Acompanhamento de pagamentos e documentos de execução financeira',
+      'Dashboards, notificações e integrações com bases institucionais'
+    ],
+    tags: ['Node.js', 'Express', 'EJS', 'MongoDB', 'Docker']
+  },
+  {
+    title: 'SISP — Gestão Patrimonial',
+    description: 'Desenvolvi do zero o SISP, plataforma que acompanha o ciclo completo dos bens da CGE/RJ: cadastro, localização, depreciação, reavaliação, transferência e baixa. O sistema também controla empréstimos de notebooks e gera termos com assinatura digital.',
+    acronym: 'SISP',
+    institutional: true,
+    previewType: 'assets',
+    role: 'Desenvolvimento do zero',
+    details: 'O SISP centraliza a gestão patrimonial por subunidade e oferece uma visão operacional e gerencial dos bens. Além dos fluxos patrimoniais, a plataforma automatiza empréstimos e devoluções de equipamentos, documentos comprobatórios, assinaturas e notificações em tempo real.',
+    highlights: [
+      'Cadastro, depreciação, reavaliação, localização e baixa de bens',
+      'Transferências entre subunidades com documentos e assinaturas',
+      'Empréstimos de notebooks com termos digitais e validação de autenticidade'
+    ],
+    tags: ['Node.js', 'Express', 'EJS', 'MongoDB', 'Docker']
+  },
+  {
+    title: 'CGE Eventos — Gestão de Eventos',
+    description: 'Atuei na evolução da plataforma que organiza a jornada dos eventos institucionais, reunindo solicitações, calendário, atividades, inscrições, check-in, comunicação e certificados. Minha participação envolveu novos fluxos e correções de bugs.',
+    acronym: 'CGE EVENTOS',
+    institutional: true,
+    previewType: 'events',
+    role: 'Evolução de fluxos e correção de bugs',
+    details: 'O CGE Eventos apoia todo o processo de uma atividade institucional: solicitação e organização, divulgação, gestão de palestrantes e participantes, inscrições, controle de presença, relatórios e emissão de certificados. Atuei na manutenção evolutiva em colaboração com a equipe responsável.',
+    highlights: [
+      'Implementação de novos fluxos para criação e gestão de eventos',
+      'Correções de bugs e ajustes de estabilidade',
+      'Melhorias na comunicação por e-mail e nas informações aos participantes'
+    ],
+    tags: ['Node.js', 'Express', 'EJS', 'MongoDB', 'Docker']
   },
 ];
 
@@ -69,14 +145,18 @@ const tagCategoryMap = {
   React: 'frontend',
   CSS: 'frontend',
   Bootstrap: 'frontend',
-  Docusaurus: 'docs',
-  Markdown: 'docs',
   'Next.js': 'frontend',
+  TypeScript: 'frontend',
+  Vite: 'frontend',
   'Node.js': 'backend',
+  Express: 'backend',
   EJS: 'backend',
   Python: 'backend',
   MySQL: 'database',
   MongoDB: 'database',
+  Docker: 'tooling',
+  FFmpeg: 'tooling',
+  LibreOffice: 'tooling',
   Streamlit: 'tooling',
   Pytube: 'tooling',
 };
