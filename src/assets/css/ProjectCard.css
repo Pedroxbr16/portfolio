@@ -461,9 +461,18 @@
   position: fixed;
   inset: 0;
   z-index: 2000;
-  display: grid;
-  place-items: center;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 24px;
+  padding-left: max(24px, env(safe-area-inset-left));
+  padding-right: max(24px, env(safe-area-inset-right));
+  padding-top: max(24px, env(safe-area-inset-top));
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   background: rgba(2, 6, 23, 0.82);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -471,9 +480,17 @@
 
 .project-modal {
   position: relative;
+  box-sizing: border-box;
+  margin: auto;
+  flex-shrink: 0;
   width: min(920px, 100%);
+  max-width: 100%;
   max-height: min(760px, 90vh);
+  max-height: min(760px, 90dvh);
   overflow: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
   display: grid;
   grid-template-columns: minmax(300px, 0.9fr) minmax(360px, 1.1fr);
   color: var(--text-main);
@@ -490,11 +507,15 @@
   z-index: 2;
   width: 38px;
   height: 38px;
+  min-width: 38px;
+  min-height: 38px;
   display: grid;
   place-items: center;
   padding: 0;
   color: #E2E8F0;
   background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 50%;
   cursor: pointer;
@@ -509,6 +530,7 @@
 
 .project-modal__preview {
   min-height: 100%;
+  min-width: 0;
   overflow: hidden;
   background: #090E18;
   border-radius: 21px 0 0 21px;
@@ -527,6 +549,8 @@
 .project-modal__image {
   display: block;
   width: 100%;
+  max-width: 100%;
+  height: auto;
   max-height: 430px;
   object-fit: contain;
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -584,6 +608,7 @@
 }
 
 .project-modal__body {
+  min-width: 0;
   padding: 48px 42px 40px;
 }
 
@@ -599,6 +624,8 @@
   margin: 10px 48px 14px 0;
   font-size: clamp(25px, 3vw, 34px);
   line-height: 1.15;
+  text-wrap: balance;
+  overflow-wrap: break-word;
 }
 
 .project-modal__body > p {
@@ -606,6 +633,7 @@
   color: #AAB3C2;
   font-size: 15px;
   line-height: 1.7;
+  overflow-wrap: break-word;
 }
 
 .project-modal__role {
@@ -650,6 +678,7 @@
   color: #CBD5E1;
   font-size: 14px;
   line-height: 1.45;
+  overflow-wrap: break-word;
 }
 
 .project-modal__highlights svg {
@@ -677,35 +706,117 @@
 
 .project-modal__links {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin-top: 24px;
   padding-top: 18px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.project-modal__links .btn-outline,
+.project-modal__links .btn-primary {
+  flex: 1 1 160px;
+  min-height: 44px;
+  white-space: nowrap;
+}
+
+/* Tablet: empilha mais cedo para dar respiro ao texto */
+@media (max-width: 860px) {
+  .project-modal {
+    max-height: 92vh;
+    max-height: 92dvh;
+    grid-template-columns: 1fr;
+    border-radius: 20px;
+  }
+
+  .project-modal__preview {
+    min-height: 0;
+    border-radius: 19px 19px 0 0;
+  }
+
+  .project-modal__preview--public {
+    aspect-ratio: 16 / 9;
+    min-height: 200px;
+    padding: 22px;
+  }
+
+  /* Preview institucional usa altura natural, sem aspect-ratio forçado */
+  .project-modal__preview:not(.project-modal__preview--public) {
+    aspect-ratio: auto;
+  }
+
+  .project-modal__image {
+    max-height: 260px;
+  }
+
+  .project-modal__preview .institutional-preview__topbar {
+    height: 34px;
+    flex-basis: 34px;
+    padding: 0 14px;
+  }
+
+  .project-modal__preview .institutional-preview__shell {
+    grid-template-columns: 52px 1fr;
+  }
+
+  .project-modal__preview .institutional-preview__sidebar {
+    gap: 14px;
+    padding-top: 20px;
+  }
+
+  .project-modal__preview .institutional-preview__sidebar svg {
+    font-size: 20px;
+  }
+
+  .project-modal__preview .institutional-preview__content {
+    padding: 20px 18px;
+  }
+
+  .project-modal__preview .institutional-preview__heading strong {
+    font-size: 15px;
+  }
+
+  .project-modal__preview .preview-chart {
+    height: 84px;
+  }
+
+  .project-modal__preview .preview-asset-grid span {
+    height: 48px;
+  }
+
+  .project-modal__body {
+    padding: 32px 28px 30px;
+  }
+
+  .project-modal__body h3 {
+    font-size: clamp(22px, 4.5vw, 28px);
+  }
+}
+
 @media (max-width: 720px) {
   .project-modal-backdrop {
     padding: 12px;
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+    padding-top: max(12px, env(safe-area-inset-top));
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+    align-items: flex-start;
   }
 
   .project-modal {
     max-height: 94vh;
+    max-height: 94dvh;
     grid-template-columns: 1fr;
     border-radius: 18px;
   }
 
-  .project-modal__preview {
-    min-height: 220px;
-    aspect-ratio: 16 / 9;
-    border-radius: 17px 17px 0 0;
-  }
-
   .project-modal__preview--public {
+    min-height: 180px;
     padding: 18px;
   }
 
   .project-modal__image {
-    max-height: 100%;
+    max-height: 220px;
   }
 
   .project-modal__body {
@@ -713,11 +824,242 @@
   }
 
   .project-modal__body h3 {
-    margin-right: 0;
+    margin-right: 44px;
   }
 
   .institutional-actions {
     align-items: stretch;
     flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-modal-backdrop {
+    padding: 10px;
+    padding-left: max(10px, env(safe-area-inset-left));
+    padding-right: max(10px, env(safe-area-inset-right));
+    padding-top: max(10px, env(safe-area-inset-top));
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
+  }
+
+  .project-modal {
+    width: 100%;
+    max-height: 96vh;
+    max-height: 96dvh;
+    border-radius: 16px;
+  }
+
+  .project-modal__close {
+    top: 10px;
+    right: 10px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 18px;
+  }
+
+  .project-modal__preview {
+    border-radius: 15px 15px 0 0;
+  }
+
+  .project-modal__preview--public {
+    min-height: 160px;
+    padding: 14px;
+  }
+
+  .project-modal__image {
+    max-height: 180px;
+    border-radius: 10px;
+  }
+
+  .project-modal__preview .institutional-preview__topbar {
+    height: 30px;
+    flex-basis: 30px;
+    padding: 0 12px;
+  }
+
+  .project-modal__preview .institutional-preview__topbar small {
+    font-size: 7px;
+  }
+
+  .project-modal__preview .institutional-preview__shell {
+    grid-template-columns: 44px 1fr;
+  }
+
+  .project-modal__preview .institutional-preview__sidebar {
+    gap: 10px;
+    padding: 14px 6px;
+  }
+
+  .project-modal__preview .institutional-preview__sidebar svg {
+    font-size: 16px;
+  }
+
+  .project-modal__preview .institutional-preview__sidebar span {
+    width: 20px;
+    height: 3px;
+  }
+
+  .project-modal__preview .institutional-preview__content {
+    padding: 16px 14px;
+  }
+
+  .project-modal__preview .institutional-preview__heading strong {
+    font-size: 13px;
+  }
+
+  .project-modal__preview .institutional-preview__heading > i {
+    width: 28px;
+  }
+
+  .project-modal__preview .preview-section-label,
+  .project-modal__preview .preview-metrics small {
+    font-size: 9px;
+  }
+
+  .project-modal__preview .preview-metrics {
+    gap: 6px;
+  }
+
+  .project-modal__preview .preview-chart {
+    height: 72px;
+    padding: 6px 6px 0;
+    gap: 5px;
+  }
+
+  .project-modal__preview .preview-asset-grid span {
+    height: 38px;
+  }
+
+  .project-modal__preview .preview-document-row {
+    min-height: 28px;
+  }
+
+  .project-modal__preview .preview-calendar-grid {
+    gap: 3px;
+  }
+
+  .project-modal__body {
+    padding: 24px 18px 22px;
+  }
+
+  .project-modal__eyebrow {
+    font-size: 10px;
+    padding-right: 44px;
+  }
+
+  .project-modal__body h3 {
+    margin: 8px 44px 10px 0;
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  .project-modal__body > p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+
+  .project-modal__role {
+    padding: 12px 14px;
+  }
+
+  .project-modal__role strong {
+    font-size: 14px;
+  }
+
+  .project-modal__body h4 {
+    margin: 20px 0 10px;
+    font-size: 14px;
+  }
+
+  .project-modal__highlights li {
+    font-size: 13.5px;
+  }
+
+  .project-modal__links {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .project-modal__links .btn-outline,
+  .project-modal__links .btn-primary {
+    flex: none;
+    width: 100%;
+    box-sizing: border-box;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .project-modal__restricted {
+    font-size: 11.5px;
+  }
+}
+
+/* Telas muito estreitas: evita overflow horizontal */
+@media (max-width: 360px) {
+  .project-modal__body {
+    padding: 22px 14px 20px;
+  }
+
+  .project-modal__body h3 {
+    font-size: 20px;
+  }
+
+  .project-modal__preview--public {
+    min-height: 140px;
+    padding: 12px;
+  }
+
+  .project-modal__preview .institutional-preview__content {
+    padding: 14px 12px;
+  }
+
+  .project-modal__preview .preview-chart {
+    height: 60px;
+  }
+}
+
+/* Landscape com pouca altura: garante rolagem sem cortar o topo */
+@media (max-height: 500px) and (orientation: landscape) {
+  .project-modal-backdrop {
+    align-items: flex-start;
+    padding: 12px;
+  }
+
+  .project-modal {
+    grid-template-columns: 1fr;
+    max-height: 96vh;
+    max-height: 96dvh;
+  }
+
+  .project-modal__preview--public {
+    min-height: 140px;
+    aspect-ratio: auto;
+    padding: 14px;
+  }
+
+  .project-modal__preview:not(.project-modal__preview--public) {
+    aspect-ratio: auto;
+  }
+
+  .project-modal__image {
+    max-height: 160px;
+  }
+
+  .project-modal__preview .preview-chart {
+    height: 64px;
+  }
+
+  .project-modal__body {
+    padding: 24px 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-modal-backdrop {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }
