@@ -122,14 +122,14 @@ export default function Portfolio() {
         <div className="intro-content">
           <div className="intro-text reveal">
             <h1>Pedro Justo</h1>
-            <p className="subtitle">Desenvolvedor FullStack</p>
+            <p className="subtitle">Coordenador de Sistemas e Inovação | Desenvolvedor Full Stack</p>
 
             <p className="description">
-              Sou desenvolvedor Full Stack com foco em Node.js, EJS e React, criando aplicações web de ponta a ponta com interfaces dinâmicas, regras de negócio bem definidas e integrações com bancos de dados como MySQL e MongoDB. Atuo desde a modelagem e estruturação de rotas até a entrega da interface, sempre priorizando organização de código, manutenção e performance.
+              Sou estudante de Análise e Desenvolvimento de Sistemas e atuo como Coordenador de Sistemas e Inovação na Controladoria-Geral do Estado do Rio de Janeiro. Coordeno a equipe de desenvolvimento, gerencio projetos e conecto as necessidades das áreas de negócio às soluções técnicas.
             </p>
 
             <p className="description">
-              Nos projetos que desenvolvi, construí soluções como sistemas de gestão, monitoramento e ferramentas web orientadas a problemas reais. Meu objetivo é entregar produtos simples de usar, escaláveis e confiáveis, com atenção à experiência do usuário, qualidade técnica e evolução contínua do sistema.
+              Como desenvolvedor Full Stack, trabalho com Node.js, EJS, React, MySQL e MongoDB na criação de sistemas de gestão, monitoramento e ferramentas web. Tenho perfil proativo, foco em resultados e busco aprimoramento contínuo por meio de projetos práticos e cursos especializados, priorizando código organizado, performance e experiência do usuário.
             </p>
 
             <div className="hero-buttons">
@@ -149,36 +149,18 @@ export default function Portfolio() {
           </div>
 
           <div className="profile-img-container reveal">
-            {/* Ícones flutuantes */}
-            <div className="floating-icon icon-react">
-              <FontAwesomeIcon icon={faReact} />
+            <div className="profile-photo-frame">
+              <img
+                src="/hero-pedro-close.webp"
+                alt="Retrato profissional de Pedro Justo"
+                className="profile-img"
+                width="1254"
+                height="1254"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+              />
             </div>
-            <div className="floating-icon icon-node">
-              <FontAwesomeIcon icon={faNodeJs} />
-            </div>
-            <div className="floating-icon icon-php">
-              <FontAwesomeIcon icon={faPhp} />
-            </div>
-            <div className="floating-icon icon-js">
-              <FontAwesomeIcon icon={faJs} />
-            </div>
-            <div className="floating-icon icon-html">
-              <FontAwesomeIcon icon={faHtml5} />
-            </div>
-            <div className="floating-icon icon-python">
-              <FontAwesomeIcon icon={faPython} />
-            </div>
-
-            <img
-              src="/user.webp"
-              alt="Pedro Justo"
-              className="profile-img"
-              width="350"
-              height="350"
-              loading="eager"
-              fetchPriority="high"
-              decoding="async"
-            />
           </div>
         </div>
       </section>
